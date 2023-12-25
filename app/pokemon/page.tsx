@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { fetchPokemon } from "@/app/lib/data";
+import Search from "@/app/ui/search";
+import Pagination from "@/app/ui/pagination";
+import { 
+  fetchPokemon,
+  countPokemonPages, 
+} from "@/app/lib/data";
 import { capitalize } from "@/app/lib/utils";
 
 export default async function Home({
@@ -14,19 +19,23 @@ export default async function Home({
   const page = Number(searchParams?.page) || 1;
 
   const pokemon = await fetchPokemon(query, page);
+  const totalPages = await countPokemonPages(query);
 
   return (
-    <main className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-20 p-12">
+    <div className="flex flex-col justify-center p-12 pt-6">
+      <Search placeholder="Search pokemon..." />
+      <div className="grid grid-cols-1 gap-20 pt-6
+        md:grid-cols-2
+        lg:grid-cols-3  
+        2xl:grid-cols-4 
+      ">
         {pokemon.map((p) => {
           return (
             <Link href={`/pokemon/${p.pokemon_id}`} key={p.pokemon_id}>
-              <div 
-                className="relative flex flex-col items-center h-auto py-5 border-2 border-gray-300 rounded-lg
-                  hover:bg-gray-300" >
-                <header className="inline w-full text-center text-2xl lg:text-3xl font-bold">{p.name}</header>
-                <div className="flex justify-center items-center absolute w-fit h-9 top-0 left-0 mt-4 ml-4 px-2 text-xl font-bold text-white bg-red-500 rounded-2xl">
-                  {p.pokemon_id}
+              <div className="relative flex flex-col items-center h-auto py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-300" >
+                <div className="flex justify-between w-full px-3">
+                  <div className="inline px-2 text-2xl text-white font-bold bg-red-500 rounded-xl">{p.pokemon_id}</div>
+                  <p className="inline text-2xl font-bold">{p.name}</p>
                 </div>
                 <img src={p.image_url} className="w-full h-auto p-8" />
                 <div className="flex justify-center items-center w-full">
@@ -38,6 +47,7 @@ export default async function Home({
           );
         })}
       </div>
-    </main>
+      <Pagination totalPages={totalPages} />
+    </div>
   );
 }
