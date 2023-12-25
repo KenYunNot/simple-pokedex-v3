@@ -17,15 +17,15 @@ export default async function Home({
 
   return (
     <main className="">
-      <div className="grid grid-cols-4 gap-20 p-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-20 p-12">
         {pokemon.map((p) => {
           return (
             <Link href={`/pokemon/${p.pokemon_id}`} key={p.pokemon_id}>
               <div 
                 className="relative flex flex-col items-center h-auto py-5 border-2 border-gray-300 rounded-lg
                   hover:bg-gray-300" >
-                <header className="inline text-3xl font-bold">{p.name}</header>
-                <div className="flex justify-center items-center absolute w-fit h-9 top-0 right-0 mt-4 mr-4 px-2 text-xl font-bold text-white bg-red-500 rounded-2xl">
+                <header className="inline w-full text-center text-2xl lg:text-3xl font-bold">{p.name}</header>
+                <div className="flex justify-center items-center absolute w-fit h-9 top-0 left-0 mt-4 ml-4 px-2 text-xl font-bold text-white bg-red-500 rounded-2xl">
                   {p.pokemon_id}
                 </div>
                 <img src={p.image_url} className="w-full h-auto p-8" />
