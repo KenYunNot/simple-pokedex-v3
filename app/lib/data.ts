@@ -1,6 +1,7 @@
 import prisma from "@/app/lib/prisma";
 
 const ITEMS_PER_PAGE = 16;
+/* Fetches Pokemon data by page (16 Pokemon at a time) for the given query and page number */
 export async function fetchPokemon(
   query: string,
   page: number,
@@ -23,7 +24,7 @@ export async function fetchPokemon(
   }
 }
 
-
+/* Counts the total number of pages for a given query */
 export async function countPokemonPages(query: string) {
   try {
     let aggregations = await prisma.pokemon.aggregate({
