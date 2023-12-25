@@ -22,3 +22,24 @@ export async function fetchPokemon(
     throw new Error("Failed to fetch Pokemon data");
   }
 }
+
+
+export async function countPokemonPages(query: string) {
+  try {
+    let aggregations = await prisma.pokemon.aggregate({
+      _count: {
+        name: true,
+      },
+      where: {
+        name: {
+          contains: query,
+        },
+      },
+    });
+    let count = aggregations._count.name;
+    return Math.ceil(count / ITEMS_PER_PAGE);
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to count pages");
+  }
+}
