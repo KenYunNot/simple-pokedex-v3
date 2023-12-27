@@ -25,22 +25,21 @@ export default async function Home({
     <div className="flex flex-col justify-center p-12 pt-6">
       <Search placeholder="Search pokemon..." />
       <div className="grid grid-cols-1 gap-20 pt-6
-        md:grid-cols-2
-        lg:grid-cols-3  
+        xl:grid-cols-2 
         2xl:grid-cols-4 
       ">
         {pokemon.map((p) => {
           return (
             <Link href={`/pokemon/${p.pokemon_id}`} key={p.pokemon_id}>
-              <div className="relative flex flex-col items-center h-auto py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-300" >
+              <div className="relative flex flex-col justify-between items-center py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-300" style={{height: '650px'}}>
                 <div className="flex justify-between w-full px-3">
                   <div className="inline px-2 text-2xl text-white font-bold bg-red-500 rounded-xl">{p.pokemon_id}</div>
-                  <p className="inline text-2xl font-bold">{p.name}</p>
+                  <p className="inline text-2xl font-bold">{p.full_name}</p>
                 </div>
-                <img src={p.image_url} className="w-full h-auto p-8" />
+                <img src={p.image_url} className="p-8" />
                 <div className="flex justify-center items-center w-full">
-                  <div className={`type-icon ${p.type1}`}>{capitalize(p.type1)}</div>
-                  {p.type2 && <div className={`type-icon ${p.type2}`}>{capitalize(p.type2)}</div>}
+                  <div className={`type-icon ${p.type1}`}>{p.type1.toUpperCase()}</div>
+                  {p.type2 && <div className={`type-icon ${p.type2}`}>{p.type2.toUpperCase()}</div>}
                 </div>
               </div>
             </Link>
