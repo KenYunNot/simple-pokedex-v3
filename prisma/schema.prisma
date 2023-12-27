@@ -12,6 +12,7 @@ datasource db {
 model pokemon {
   pokemon_id  Int     @id
   name        String  @db.VarChar(255)
+  full_name   String  @db.VarChar(255)
   species     String  @db.VarChar(255)
   image_url   String  @db.VarChar(255)
   sprite_url  String  @db.VarChar(255)
