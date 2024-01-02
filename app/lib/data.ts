@@ -13,9 +13,33 @@ export async function fetchPokemon(
         name: {
           contains: query,
         },
+        is_default: true,
+      },
+      include: {
+        types: true,
+        species: true,
       },
       skip: offset,
       take: ITEMS_PER_PAGE,
+    });
+    return pokemon;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch Pokemon data");
+  }
+}
+
+/* Fetches Pokemon data by the given id */
+export async function fetchPokemonById(id: number) {
+  try {
+    let pokemon = await prisma.pokemon.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        types: true,
+        species: true,
+      },
     });
     return pokemon;
   } catch (error) {
