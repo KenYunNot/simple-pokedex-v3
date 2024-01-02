@@ -1,3 +1,4 @@
+import Image from "next/image";
 import TypeIcon from "@/app/ui/pokemon/type-icon";
 import { Pokemon } from "@/app/lib/definitions"
 
@@ -8,10 +9,17 @@ export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
         <div className="inline px-2 text-2xl text-white font-bold bg-red-500 rounded-xl">{pokemon.id}</div>
         <p className="inline text-2xl font-bold">{pokemon.species.full_name}</p>
       </div>
-      <img src={pokemon.image_url} className="p-8" />
+      <Image 
+        src={pokemon.image_url}
+        alt={`Image of ${pokemon.name}`}
+      />
       <div className="flex justify-center items-center w-full">
         {pokemon.types.map((type) => {
-          return <TypeIcon type={type.name} />;
+          return (
+            <div key={type.name}>
+              <TypeIcon type={type.name} />
+            </div>
+          );
         })}
       </div>
     </div>
