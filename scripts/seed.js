@@ -1,45 +1,25 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
+const { collectGenerateParams } = require("next/dist/build/utils");
 
+/* ------------------------------------------------------------------------------------------- */
+/*                                   HELPER FUNCTIONS                                          */
+/* ------------------------------------------------------------------------------------------- */
 
 /* Sleeps for the given time in milliseconds */
 async function sleep(time) {
   await new Promise(r => setTimeout(r, time));
 }
 
-
-
-async function seedPokemon() {
-  let index = 1;
-  try {
-    // Fetch from api and convert to JSON
-    let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}`);
-    let pokemon = await response.json();
-    while (response.status === 200) {
-      // Deallocate all required fields
-      let id = pokemon.id;
-      let name = pokemon.name;
-      
-      let image_url = pokemon.sprites.other['official-artwork'].front_default;
-      if (image_url === null) image_url = '/no-image.svg';
-      let sprite_url = pokemon.sprites.front_default;
-      if (sprite_url === null) image_url = '/no-image.svg';
-      // Fetch type ids from list of types in the following format:
-      //     [ {id: <type_id>}, {id: <type_id>}? ]
-      // We need this format connect records more conveniently
-      const getTypeIdsFromTypes = (type) => {
-        let tokens = type.type.url.split('/');
-        return Number(tokens[tokens.length-2]);
-      }
-      let types = pokemon.types.map(getTypeIdsFromTypes);
-    }
-  } catch (error) {
-    console.error("Error seeding Pokemon:", error);
-    throw error;
-  }
+/* For fields in multiple languages, return all english results */
+function getEnglish(entries) {
+  return entries.filter((n) => n.language.name === 'en');
 }
 
+/* ------------------------------------------------------------------------------------------- */
+/*                                   SEEDING FUNCTIONS                                         */
+/* ------------------------------------------------------------------------------------------- */
 
 async function seedTypes() {
   // Declare array with all type names
@@ -68,11 +48,11 @@ async function seedTypes() {
     for (let [id, name] of types.entries()) {
       await prisma.type.upsert({
         where: {
-          id,
+          id: id+1,
         },
         update: {},
         create: {
-          id,
+          id: id+1,
           name,
         }
       });
@@ -83,25 +63,25 @@ async function seedTypes() {
     throw error;
   }
   // Connect all type relations
-  let index = 2;
+  let index = 1;
   try {
     // Fetch from api and convert to JSON
     let response = await fetch(`https://pokeapi.co/api/v2/type/${index}`);
-    let type = await response.json();
     while (response.status === 200) {
-      // Fetch type ids for all damage relations in the following format:
+      let type = await response.json();
+      // Map type ids for all damage relations in the following format:
       //     [ {id: <type_id>}, {id: <type_id>}? ]
       // We need this format connect records more conveniently
-      const getTypeIdsFromRelations = (relation) => {
+      const mapTypeIdFromURL = (relation) => {
         let tokens = relation.url.split("/");
         return { id: Number(tokens[tokens.length-2])};
       }
-      let double_damage_from = type.damage_relations.double_damage_from.map(getTypeIdsFromRelations);
-      let double_damage_to = type.damage_relations.double_damage_to.map(getTypeIdsFromRelations);
-      let half_damage_from = type.damage_relations.half_damage_from.map(getTypeIdsFromRelations);
-      let half_damage_to = type.damage_relations.half_damage_to.map(getTypeIdsFromRelations);
-      let no_damage_from = type.damage_relations.no_damage_from.map(getTypeIdsFromRelations);
-      let no_damage_to = type.damage_relations.no_damage_to.map(getTypeIdsFromRelations);
+      let double_damage_from = type.damage_relations.double_damage_from.map(mapTypeIdFromURL);
+      let double_damage_to = type.damage_relations.double_damage_to.map(mapTypeIdFromURL);
+      let half_damage_from = type.damage_relations.half_damage_from.map(mapTypeIdFromURL);
+      let half_damage_to = type.damage_relations.half_damage_to.map(mapTypeIdFromURL);
+      let no_damage_from = type.damage_relations.no_damage_from.map(mapTypeIdFromURL);
+      let no_damage_to = type.damage_relations.no_damage_to.map(mapTypeIdFromURL);
       await prisma.type.update({
         where: {
           id: index,
@@ -130,11 +110,6 @@ async function seedTypes() {
       console.log(`Connected ${type.name} type relations`);
       await sleep(1000);
       response = await fetch(`https://pokeapi.co/api/v2/type/${++index}`);
-      try {
-        type = await response.json();
-      } catch (error) {
-        type = null;
-      }
     }
   } catch (error) {
     console.error("Error connecting type relations:", error);
@@ -144,11 +119,146 @@ async function seedTypes() {
 }
 
 
+async function seedPokemonSpecies() {
+  let index = 1;
+  let flavor_texts_default = ["Ecology under research", "Ecology under research"];
+  try {
+    // Fetch from api and convert to JSON
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${index}`);
+    while (response.status === 200) {
+      let species = await response.json();
+      let id = species.id;
+      let name = species.name;
+      let namesEnglish = getEnglish(species.names);
+      let full_name = namesEnglish[0] ? namesEnglish[0].name : null;
+      let base_happiness = species.base_happiness === null ? 50 : species.base_happiness;
+      let capture_rate = species.capture_rate;
+      let growth_rate = species.growth_rate.name;
+      let english_entries = getEnglish(species.flavor_text_entries).map((entry) => entry.flavor_text);
+      let flavor_texts = english_entries.length > 0 ? english_entries.slice(-2) : flavor_texts_default;
+      let gender_rate = species.gender_rate;
+      let generaEnglish = getEnglish(species.genera);
+      let genus = generaEnglish[0] ? generaEnglish[0].genus : null;
+      let is_legendary = species.is_legendary;
+      let is_mythical = species.is_mythical;
+      await prisma.pokemonSpecies.upsert({
+        where: {
+          id,
+        },
+        update: {},
+        create: {
+          id,
+          name,
+          full_name,
+          base_happiness,
+          capture_rate,
+          growth_rate,
+          flavor_texts,
+          gender_rate,
+          genus,
+          is_legendary,
+          is_mythical,
+        },
+      });
+      console.log(`Seeded ${full_name} species`);
+      await sleep(1000);
+      response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${++index}`);
+    }
+    
+  } catch (error) {
+    console.error("Error seeding Pokemon species:", error);
+    throw error;
+  }
+}
+
+
+const ID_INDEX = 6;
+async function seedPokemon(start) {
+  let index = start;
+  try {
+    let pokemon_response = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}`);
+    await sleep(1000);
+    while (pokemon_response.status === 200) {
+      let pokemon = await pokemon_response.json();
+      // Deallocate all required fields
+      let id = pokemon.id;
+      let name = pokemon.name;
+      let form_name;
+      if (name === pokemon.forms[0].name) {
+        let forms_response = await fetch(pokemon.forms[0].url);
+        await sleep(1000);
+        let forms = await forms_response.json();
+        let forms_english = getEnglish(forms.form_names)[0];
+        form_name = forms_english ? forms_english.name : null;
+      }
+      let abilities = pokemon.abilities.map((ability) => ability.ability.name);
+      let image_url = pokemon.sprites.other['official-artwork'].front_default;
+      if (image_url === null) image_url = '/no-image.svg';
+      let sprite_url = pokemon.sprites.front_default;
+      if (sprite_url === null) sprite_url = '/no-image.svg';
+      // Get species id from URL in the proper format to connect
+      let species_id = { id: Number(pokemon.species.url.split('/')[ID_INDEX]) };
+      // Get type ids from URL in the proper format to connect
+      let type_ids = pokemon.types.map((type) => {
+        return { id: Number(type.type.url.split('/')[ID_INDEX])}
+      });
+      let is_default = pokemon.is_default;
+      let height = pokemon.height;
+      let weight = pokemon.weight;
+      // Create Pokemon first
+      await prisma.pokemon.upsert({
+        where: {
+          id,
+        },
+        update: {
+          height,
+          weight,
+        },
+        create: {
+          id,
+          name,
+          form_name,
+          abilities,
+          image_url,
+          sprite_url,
+          is_default,
+          height,
+          weight,
+          species: {
+            connect: species_id,
+          },
+        },
+      });
+      // Connect types one by one to ensure correct order
+      for (let type_id of type_ids) {
+        await prisma.pokemon.update({
+          where: {
+            id,
+          },
+          data: {
+            types: {
+              connect: type_id,
+            },
+          },
+        })
+      }
+      console.log(`Seeded Pokemon ${name}`);
+      pokemon_response = await fetch(`https://pokeapi.co/api/v2/pokemon/${++index}`);
+      await sleep(1000);
+    }
+  } catch (error) {
+    console.error("Error seeding Pokemon:", error);
+    throw error;
+  }
+}
+
+
 async function main() {
   // Finished seeding and connecting all types on 2023-12-27 at 5:40pm EST
   // Finished seeding all Pokemon on 2023-12-25 at 10:00pm EST
   // await seedTypes();
-  await seedPokemon();
+  // await seedPokemonSpecies();
+  // await seedPokemon(1);
   console.log("Finished seeding all Pokemon");
 }
 
