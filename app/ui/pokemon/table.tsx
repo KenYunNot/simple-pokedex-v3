@@ -18,7 +18,7 @@ export default function Table({
   }
 
   return (
-    <div className="w-full h-fit mt-6">
+    <div className="m-6">
       <h2 className="text-2xl font-semibold">{header}</h2>
       <div className="mt-3">
         {getTable()}
