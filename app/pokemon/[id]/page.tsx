@@ -18,6 +18,8 @@ export default async function Pokemon({ params } : { params: { id: string }}) {
       <div>
         <Image 
           src={pokemon.image_url} 
+          width={475}
+          height={475}
           alt={`Image of ${pokemon.name}`}
         />
         <Table header="Pokédex data" pokemon={pokemon} />

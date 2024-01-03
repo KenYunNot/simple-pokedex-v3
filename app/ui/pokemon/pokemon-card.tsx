@@ -11,6 +11,8 @@ export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
       </div>
       <Image 
         src={pokemon.image_url}
+        width={475}
+        height={475}
         alt={`Image of ${pokemon.name}`}
       />
       <div className="flex justify-center items-center w-full">
