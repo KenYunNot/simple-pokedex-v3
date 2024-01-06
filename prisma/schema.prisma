@@ -17,7 +17,7 @@ model Pokemon {
   image_url  String         @db.VarChar(255)
   sprite_url String         @db.VarChar(255)
   species    PokemonSpecies @relation(fields: [species_id], references: [id])
-  species_id Int            @unique
+  species_id Int            
   types      Type[]
   is_default Boolean
   height     Int
