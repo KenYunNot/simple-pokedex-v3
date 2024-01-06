@@ -30,6 +30,8 @@ model PokemonSpecies {
   full_name      String    @db.VarChar(255)
   base_happiness Int
   capture_rate   Int
+  egg_cycles     Int       
+  egg_groups     String[]
   growth_rate    String
   flavor_texts   String[]
   gender_rate    Int
