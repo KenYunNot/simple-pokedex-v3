@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-center sm:justify-start bg-red-500">
+    <nav className="flex justify-start bg-red-500">
       <Link
         href='/'  
       >
