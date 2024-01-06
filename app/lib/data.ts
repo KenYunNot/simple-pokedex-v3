@@ -1,7 +1,7 @@
 import prisma from "@/app/lib/prisma";
 
 const ITEMS_PER_PAGE = 16;
-/* Fetches Pokemon data by page (16 Pokemon at a time) for the given query and page number */
+/* Given a query string and a page number, fetch a 16 count Pokemon page */
 export async function fetchPokemon(
   query: string,
   page: number,
@@ -29,7 +29,7 @@ export async function fetchPokemon(
   }
 }
 
-/* Fetches Pokemon data by the given id or name */
+/* Given an id number, fetch an individual Pokemon */
 export async function fetchPokemonById(id: number) {
   try {
     let pokemon = await prisma.pokemon.findFirst({
@@ -48,6 +48,7 @@ export async function fetchPokemonById(id: number) {
   }
 }
 
+/* Given an id number, fetch an individual Pokemon species */
 export async function fetchPokemonSpeciesById(id: number) {
   try {
     let species = await prisma.pokemonSpecies.findFirst({
@@ -70,6 +71,7 @@ export async function fetchPokemonSpeciesById(id: number) {
   }
 }
 
+/* Given an id number, fetches a Pokemon's default full name (full_name field provided in PokemonSpecies) */
 export async function fetchPokemonFullName(id: number) {
   try {
     let species = await prisma.pokemonSpecies.findFirst({
@@ -87,7 +89,7 @@ export async function fetchPokemonFullName(id: number) {
   }
 }
 
-/* Takes an identifier either in the form of a number id or a string name and returns the corresponding Pokemon's id */
+/* Given an identifier either in the form of a number id or a string name, return the corresponding Pokemon's id */
 export async function fetchPokemonId(identifier: string) {
   let id = Number(identifier);
   // If the identifier is already a number, return it as the id
