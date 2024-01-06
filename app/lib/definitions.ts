@@ -29,3 +29,24 @@ export type Type = Prisma.TypeGetPayload<{
     pokemon: true,
   }
 }>;
+
+export const TYPES = [
+  'normal',
+  'fighting', 
+  'flying', 
+  'poison', 
+  'ground', 
+  'rock', 
+  'bug', 
+  'ghost', 
+  'steel', 
+  'fire', 
+  'water', 
+  'grass', 
+  'electric', 
+  'psychic', 
+  'ice', 
+  'dragon', 
+  'dark', 
+  'fairy'
+];
