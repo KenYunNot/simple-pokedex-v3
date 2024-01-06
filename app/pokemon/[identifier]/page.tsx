@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PokedexData from "@/app/ui/pokemon/[idOrName]/pokedex";
-import TrainingData from "@/app/ui/pokemon/[idOrName]/training";
-import TypeDefenses from "@/app/ui/pokemon/[idOrName]/type-defenses";
+import PokedexData from "@/app/ui/pokemon/[identifier]/pokedex";
+import TrainingData from "@/app/ui/pokemon/[identifier]/training";
+import TypeDefenses from "@/app/ui/pokemon/[identifier]/type-defenses";
+import BreedingData from "@/app/ui/pokemon/[identifier]/breeding";
 import { fetchPokemonSpeciesById, fetchPokemonId, fetchPokemonFullName } from "@/app/lib/data";
 import { 
   ChevronLeftIcon, 
@@ -53,6 +54,7 @@ export default async function Pokemon({ params }: { params: { identifier: string
             <PokedexData pokemon={pokemon}/>
             <TrainingData pokemon={pokemon} />
             <TypeDefenses pokemon={pokemon} />
+            <BreedingData pokemon={pokemon} />
           </div>
         )
       })}
