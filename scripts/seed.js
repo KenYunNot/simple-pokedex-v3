@@ -119,8 +119,25 @@ async function seedTypes() {
 }
 
 
+const egg_groups_map = {
+  'monster': 'Monster',
+  'water1': 'Water 1',
+  'bug': 'Bug',
+  'flying': 'Flying',
+  'ground': 'Ground',
+  'fairy': 'Fairy',
+  'plant': 'Grass',
+  'humanshape': 'Human-like',
+  'water3': 'Water 3',
+  'mineral': 'Mineral',
+  'indeterminate': 'Amorphous',
+  'water2': 'Water 2',
+  'ditto': 'Ditto',
+  'dragon': 'Dragon',
+  'no-eggs': 'Undiscovered',
+}
 async function seedPokemonSpecies() {
-  let index = 1;
+  let index = 912;
   let flavor_texts_default = ["Ecology under research", "Ecology under research"];
   try {
     // Fetch from api and convert to JSON
@@ -133,6 +150,8 @@ async function seedPokemonSpecies() {
       let full_name = namesEnglish[0] ? namesEnglish[0].name : null;
       let base_happiness = species.base_happiness === null ? 50 : species.base_happiness;
       let capture_rate = species.capture_rate;
+      let egg_cycles = species.hatch_counter ? species.hatch_counter : -1;
+      let egg_groups = species.egg_groups.reverse().map((group) => egg_groups_map[group.name]);
       let growth_rate = species.growth_rate.name;
       let english_entries = getEnglish(species.flavor_text_entries).map((entry) => entry.flavor_text);
       let flavor_texts = english_entries.length > 0 ? english_entries.slice(-2) : flavor_texts_default;
@@ -152,6 +171,8 @@ async function seedPokemonSpecies() {
           full_name,
           base_happiness,
           capture_rate,
+          egg_cycles,
+          egg_groups,
           growth_rate,
           flavor_texts,
           gender_rate,
@@ -199,7 +220,7 @@ async function seedPokemon(start) {
       // Get species id from URL in the proper format to connect
       let species_id = { id: Number(pokemon.species.url.split('/')[ID_INDEX]) };
       // Get type ids from URL in the proper format to connect
-      let type_ids = pokemon.types.map((type) => {
+      let type_ids = pokemon.types.reverse().map((type) => {
         return { id: Number(type.type.url.split('/')[ID_INDEX])}
       });
       let is_default = pokemon.is_default;
@@ -210,10 +231,7 @@ async function seedPokemon(start) {
         where: {
           id,
         },
-        update: {
-          height,
-          weight,
-        },
+        update: {},
         create: {
           id,
           name,
@@ -227,21 +245,11 @@ async function seedPokemon(start) {
           species: {
             connect: species_id,
           },
+          types: {
+            connect: type_ids,
+          }
         },
       });
-      // Connect types one by one to ensure correct order
-      for (let type_id of type_ids) {
-        await prisma.pokemon.update({
-          where: {
-            id,
-          },
-          data: {
-            types: {
-              connect: type_id,
-            },
-          },
-        })
-      }
       console.log(`Seeded Pokemon ${name}`);
       pokemon_response = await fetch(`https://pokeapi.co/api/v2/pokemon/${++index}`);
       await sleep(1000);
@@ -259,6 +267,7 @@ async function main() {
   // await seedTypes();
   // await seedPokemonSpecies();
   // await seedPokemon(1);
+  await test();
   console.log("Finished seeding all Pokemon");
 }
 
