@@ -267,7 +267,7 @@ async function main() {
   // await seedTypes();
   // await seedPokemonSpecies();
   // await seedPokemon(1);
-  await test();
+  await seedPokemon(10001);
   console.log("Finished seeding all Pokemon");
 }
 
