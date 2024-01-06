@@ -43,7 +43,7 @@ export default async function Pokemon({ params }: { params: { identifier: string
       </h1>
       {species.pokemon.map((pokemon) => {
         return (
-          <div>
+          <div key={pokemon.id}>
             <Image
               src={pokemon.image_url}
               width={475}
