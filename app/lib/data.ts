@@ -102,17 +102,18 @@ export async function fetchPokemonSpeciesById(id: number) {
 }
 
 /* Given an id number, fetch a Pokemon's full name in its default form (full_name field provided in PokemonSpecies) */
-export async function fetchPokemonFullName(id: number) {
+export async function fetchPokemonNames(id: number) {
   try {
     let species = await prisma.pokemonSpecies.findFirst({
       where: {
         id,
       },
       select: {
-        full_name: true
+        name: true,
+        full_name: true,
       }
     });
-    return species ? species.full_name : undefined;
+    return species;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(`Failed to fetch Pokemon species with ID ${id}`);
@@ -163,12 +164,23 @@ export async function countPokemonPages(query: string) {
   }
 }
 
+/* Fetch all Pokemon types (simple format) */
+export async function fetchTypes() {
+  try {
+    let types = await prisma.type.findMany();
+    return types;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch types");
+  }
+}
+
 /* Given an id number, fetch a type */
-export async function fetchTypeById(id: number) {
+export async function fetchTypeByName(name: string) {
   try {
     let type = await prisma.type.findFirst({
       where: {
-        id
+        name,
       },
       include: {
         double_damage_from: true,
@@ -183,6 +195,6 @@ export async function fetchTypeById(id: number) {
     return type;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(`Failed to fetch Type with ID ${id}`);
+    throw new Error(`Failed to fetch Type with name ${name}`);
   }
 }
