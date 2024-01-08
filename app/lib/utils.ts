@@ -1,6 +1,5 @@
-import { Type } from "@prisma/client";
 import { fetchTypeById } from "@/app/lib/data";
-import { TYPES } from "@/app/lib/definitions";
+import { Type } from "@/app/lib/definitions";
 
 /* Capitalizes the given string */
 export function capitalize(s: string, delimiter='-') {
@@ -46,16 +45,34 @@ export function convertUnits(height: number, weight: number) {
 }
 
 /* Given a Pokemon's types, return its type defenses chart */
-export async function generateTypeDefenses(types: Type[]) {
+const TYPES = [
+  'normal',
+  'fighting', 
+  'flying', 
+  'poison', 
+  'ground', 
+  'rock', 
+  'bug', 
+  'ghost', 
+  'steel', 
+  'fire', 
+  'water', 
+  'grass', 
+  'electric', 
+  'psychic', 
+  'ice', 
+  'dragon', 
+  'dark', 
+  'fairy'
+];
+export function generateTypeDefenses(types: Type[]) {
   // Initialize the type_defenses object with all 1
   let type_defenses = {} as { [key: string] : number};
   for (let name of TYPES) {
     type_defenses[name] = 1;
   }
   // Parse through each of the Pokemon's types and adjust its type defenses according to each damage relation
-  for (let t of types) {
-    let type = await fetchTypeById(t.id);
-    if (!type) return type_defenses;
+  for (let type of types) {
     for (let double of type.double_damage_from) {
       type_defenses[double.name] *= 2;
     }
@@ -68,3 +85,4 @@ export async function generateTypeDefenses(types: Type[]) {
   }
   return type_defenses;
 }
+export { TYPES };
