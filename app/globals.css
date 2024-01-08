@@ -94,6 +94,10 @@
   text-shadow: 0px 1px 4px black;
 }
 
+.move-down-1px {
+  margin-bottom: -1px;
+}
+
 #male {
   color: blue;
 }
