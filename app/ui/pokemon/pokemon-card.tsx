@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TypeIcon from "@/app/ui/pokemon/type-icon";
+import TypeIcon from "@/app/ui/type-icon";
 import { Pokemon } from "@/app/lib/definitions"
 
 export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
@@ -21,7 +21,7 @@ export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
         {pokemon.types.map((type) => {
           return (
             <div key={type.name}>
-              <TypeIcon type={type.name} />
+              <TypeIcon type={type} />
             </div>
           );
         })}

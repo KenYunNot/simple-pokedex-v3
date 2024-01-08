@@ -1,18 +1,24 @@
-import Section from "@/app/ui/pokemon/[identifier]/data-section";
-import TypeIcon from "@/app/ui/pokemon/type-icon";
+import { Type } from "@prisma/client";
+import { fetchTypes } from "@/app/lib/data";
 import { Pokemon } from "@/app/lib/definitions";
-import { generateTypeDefenses, TYPES } from "@/app/lib/utils";
+import { generateTypeDefenses } from "@/app/lib/utils";
+import Section from "@/app/ui/pokemon/[identifier]/data-section";
+import TypeIcon from "@/app/ui/type-icon";
 import clsx from "clsx";
 
 export default async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
   const type_defenses = generateTypeDefenses(pokemon.types);
+  const types = await fetchTypes();
 
   return (
     <Section header="Type defenses">
-      <p>The effectiveness of each type on <span className="italic">{pokemon.species.full_name}</span></p>
+      <p>
+        The effectiveness of each type on{" "}
+        <span className="italic">{pokemon.species.full_name}</span>
+      </p>
       <div className="flex justify-center flex-wrap">
-        <TypeTable start={0} end={TYPES.length/2} type_defenses={type_defenses} />
-        <TypeTable start={TYPES.length/2} type_defenses={type_defenses} />
+        <TypeTable types={types} type_defenses={type_defenses} start={0} end={types.length/2} />
+        <TypeTable types={types} type_defenses={type_defenses} start={types.length/2} />
       </div>
     </Section>
   );
@@ -21,38 +27,37 @@ export default async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
 function TypeTable({
   start,
   end,
+  types,
   type_defenses,
 }: {
-  start: number;
-  end?: number;
-  type_defenses: {[key: string] : number};
+  start: number,
+  end?: number,
+  types: Type[];
+  type_defenses: { [key: string]: number };
 }) {
-  if (!end) end = TYPES.length;
+  if (!end) end = types.length;
 
   return (
     <div className="flex mt-4">
-      {TYPES.slice(start, end).map((type) => {
+      {types.slice(start, end).map((type) => {
         let element: string | number;
-        if (type_defenses[type] === 0.25) element = "\u00BC";
-        else if (type_defenses[type] === 0.5) element = "\u00BD";
-        else if (type_defenses[type] === 1) element = "";
-        else element = type_defenses[type];
-        let style = clsx(
-          'text-yellow-400',
-          {
-            "bg-gray-900" : type_defenses[type] === 0,
-            "bg-red-900" : type_defenses[type] === 0.25,
-            "bg-red-600" : type_defenses[type] === 0.5,
-            "bg-green-600" : type_defenses[type] === 2,
-            "bg-green-900" : type_defenses[type] === 4,
-          }
-        )
+        if (type_defenses[type.name] === 0.25) element = "\u00BC";
+        else if (type_defenses[type.name] === 0.5) element = "\u00BD";
+        else if (type_defenses[type.name] === 1) element = "";
+        else element = type_defenses[type.name];
+        let style = clsx("text-yellow-400", {
+          "bg-gray-900": type_defenses[type.name] === 0,
+          "bg-red-900": type_defenses[type.name] === 0.25,
+          "bg-red-600": type_defenses[type.name] === 0.5,
+          "bg-green-600": type_defenses[type.name] === 2,
+          "bg-green-900": type_defenses[type.name] === 4,
+        });
         return (
-          <div className="flex flex-col" key={type}>
+          <div className="flex flex-col" key={type.name}>
             <TypeIcon type={type} shortened={true} />
             <div
               className={`flex justify-center items-center w-8 h-8 border ${style}`}
-              key={type}
+              key={type.name}
             >
               {element}
             </div>

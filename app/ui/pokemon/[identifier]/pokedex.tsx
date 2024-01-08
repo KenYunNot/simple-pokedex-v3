@@ -1,5 +1,5 @@
 import Section from "@/app/ui/pokemon/[identifier]/data-section";
-import TypeIcon from "@/app/ui/pokemon/type-icon";
+import TypeIcon from "@/app/ui/type-icon";
 import { Pokemon } from "@/app/lib/definitions";
 import { capitalize, convertUnits } from "@/app/lib/utils";
 
@@ -24,7 +24,7 @@ export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
                 {pokemon.types.map((type) => {
                   return (
                     <div key={type.name}>
-                      <TypeIcon type={type.name} />
+                      <TypeIcon type={type} link={true} />
                     </div>
                   );
                 })}
