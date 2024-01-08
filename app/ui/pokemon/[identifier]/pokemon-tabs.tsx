@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import PokedexData from "@/app/ui/pokemon/[identifier]/pokedex";
 import TrainingData from "@/app/ui/pokemon/[identifier]/training";
 import TypeDefenses from "@/app/ui/pokemon/[identifier]/type-defenses";
