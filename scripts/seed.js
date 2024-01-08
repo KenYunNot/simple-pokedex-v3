@@ -260,6 +260,33 @@ async function seedPokemon(start) {
   }
 }
 
+async function adjustData() {
+  for (let i = 10195; i <= 10227; i++) {
+    let pokemon = await prisma.pokemon.findFirst({
+      where: {
+        id: i,
+        name: {
+          contains: "gmax",
+        }
+      },
+      include: {
+        species: true,
+      }
+    });
+    if (!pokemon) throw new Error("Couldn't find Pokemon");
+    await prisma.pokemon.update({
+      where: {
+        id: pokemon.id,
+      },
+      data: {
+        form_name: "Gigantamax " + pokemon.species.full_name,
+      }
+    });
+    console.log(pokemon.id);
+  }
+  console.log("Adjusted data");
+}
+
 
 async function main() {
   // Finished seeding and connecting all types on 2023-12-27 at 5:40pm EST
@@ -267,7 +294,8 @@ async function main() {
   // await seedTypes();
   // await seedPokemonSpecies();
   // await seedPokemon(1);
-  await seedPokemon(10001);
+  // await seedPokemon(10001);
+  await adjustData();
   console.log("Finished seeding all Pokemon");
 }
 
