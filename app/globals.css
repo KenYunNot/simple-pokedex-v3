@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+main {
+  max-width: 60%;
+  margin: 1.25rem auto;
+}
+
 .data-table {
   width: 100%;
   font-size: 15px;
@@ -43,7 +48,7 @@
 }
 
 .fire {
-  background-color: rgb(233, 56, 12); 
+  background-color: #f42; 
 }
 
 .flying {
@@ -63,11 +68,11 @@
 }
 
 .ice {
-  background-color: rgb(0, 221, 173)
+  background-color: #6cf
 }
 
 .normal {
-  background-color: rgb(161, 161, 161); 
+  background-color: #aa9; 
 }
 
 .poison {
@@ -87,7 +92,7 @@
 }
 
 .water {
-  background-color: rgb(0, 139, 253); 
+  background-color: rgb(17, 132, 247); 
 }
 
 .text-shadow {
