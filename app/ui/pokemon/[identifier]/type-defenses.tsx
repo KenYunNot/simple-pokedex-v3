@@ -1,17 +1,16 @@
 import Section from "@/app/ui/pokemon/[identifier]/data-section";
 import TypeIcon from "@/app/ui/pokemon/type-icon";
-import { Pokemon, TYPES } from "@/app/lib/definitions";
-import { generateTypeDefenses } from "@/app/lib/utils";
+import { Pokemon } from "@/app/lib/definitions";
+import { generateTypeDefenses, TYPES } from "@/app/lib/utils";
 import clsx from "clsx";
 
 export default async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
-  const type_defenses = await generateTypeDefenses(pokemon.types);
-  const multiplier = clsx({});
+  const type_defenses = generateTypeDefenses(pokemon.types);
 
   return (
     <Section header="Type defenses">
       <p>The effectiveness of each type on <span className="italic">{pokemon.species.full_name}</span></p>
-      <div className="flex flex-col items-center">
+      <div className="flex justify-center flex-wrap">
         <TypeTable start={0} end={TYPES.length/2} type_defenses={type_defenses} />
         <TypeTable start={TYPES.length/2} type_defenses={type_defenses} />
       </div>
