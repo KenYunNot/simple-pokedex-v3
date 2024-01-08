@@ -3,7 +3,17 @@ import { Prisma } from "@prisma/client";
 export type Pokemon = Prisma.PokemonGetPayload<{
   include: {
     species: true,
-    types: true,
+    types: {
+      include: {
+        double_damage_from: true,
+        double_damage_to: true,
+        half_damage_from: true,
+        half_damage_to: true,
+        no_damage_from: true,
+        no_damage_to: true,
+        pokemon: true,
+      }
+    }
   }
 }>;
 
@@ -12,7 +22,17 @@ export type PokemonSpecies = Prisma.PokemonSpeciesGetPayload<{
     pokemon: {
       include: {
         species: true,
-        types: true,
+        types: {
+          include: {
+            double_damage_from: true,
+            double_damage_to: true,
+            half_damage_from: true,
+            half_damage_to: true,
+            no_damage_from: true,
+            no_damage_to: true,
+            pokemon: true,
+          }
+        }
       }
     }
   }
@@ -29,24 +49,3 @@ export type Type = Prisma.TypeGetPayload<{
     pokemon: true,
   }
 }>;
-
-export const TYPES = [
-  'normal',
-  'fighting', 
-  'flying', 
-  'poison', 
-  'ground', 
-  'rock', 
-  'bug', 
-  'ghost', 
-  'steel', 
-  'fire', 
-  'water', 
-  'grass', 
-  'electric', 
-  'psychic', 
-  'ice', 
-  'dragon', 
-  'dark', 
-  'fairy'
-];
