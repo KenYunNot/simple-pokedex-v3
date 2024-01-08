@@ -16,8 +16,18 @@ export async function fetchPokemon(
         is_default: true,
       },
       include: {
-        types: true,
         species: true,
+        types: {
+          include: {
+            double_damage_from: true,
+            double_damage_to: true,
+            half_damage_from: true,
+            half_damage_to: true,
+            no_damage_from: true,
+            no_damage_to: true,
+            pokemon: true,
+          }
+        },
       },
       skip: offset,
       take: ITEMS_PER_PAGE,
@@ -37,8 +47,18 @@ export async function fetchPokemonById(id: number) {
         id,
       },
       include: {
-        types: true,
         species: true,
+        types: {
+          include: {
+            double_damage_from: true,
+            double_damage_to: true,
+            half_damage_from: true,
+            half_damage_to: true,
+            no_damage_from: true,
+            no_damage_to: true,
+            pokemon: true,
+          }
+        }
       }
     });
     return pokemon;
@@ -59,7 +79,17 @@ export async function fetchPokemonSpeciesById(id: number) {
         pokemon: {
           include: {
             species: true,
-            types: true,
+            types: {
+              include: {
+                double_damage_from: true,
+                double_damage_to: true,
+                half_damage_from: true,
+                half_damage_to: true,
+                no_damage_from: true,
+                no_damage_to: true,
+                pokemon: true,
+              }
+            }
           }
         }
       },
