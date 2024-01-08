@@ -15,7 +15,7 @@ export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
         <tbody>
           <tr>
             <th>National No.</th>
-            <td>{String(pokemon.id).padStart(4, "0")}</td>
+            <td>{String(pokemon.id > 10000 ? pokemon.species.id : pokemon.id).padStart(4, "0")}</td>
           </tr>
           <tr>
             <th>Type</th>
@@ -48,7 +48,7 @@ export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
             <td>
               {pokemon.abilities.map((ability, index) => {
                 let num = index + 1;
-                if (num !== pokemon.abilities.length) {
+                if (pokemon.abilities.length === 1 || num !== pokemon.abilities.length) {
                   return (
                     <p key={index}>
                       {num}. {capitalize(ability)}
