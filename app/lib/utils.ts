@@ -1,4 +1,3 @@
-import { fetchTypeById } from "@/app/lib/data";
 import { Type } from "@/app/lib/definitions";
 
 /* Capitalizes the given string */
