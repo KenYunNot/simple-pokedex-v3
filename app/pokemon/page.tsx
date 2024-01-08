@@ -24,7 +24,7 @@ export default async function PokemonList({
   return (
     <div className="flex flex-col justify-center p-12 pt-6">
       <Search placeholder="Search pokemon..." />
-      <div className="grid grid-cols-1 gap-20 pt-6
+      <div className="grid grid-cols-1 gap-8 pt-6
         xl:grid-cols-2 
         2xl:grid-cols-4 
       ">
