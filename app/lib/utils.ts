@@ -1,4 +1,24 @@
 import { Type } from "@/app/lib/definitions";
+import { Type as SimpleType } from "@prisma/client";
+
+/* ------------------------------------------------------------------------------------------- */
+/*                                   HELPER FUNCTIONS                                          */
+/* ------------------------------------------------------------------------------------------- */
+
+/* Given the DTA chart, row/column number and a multiplier, populate the row and column of the DTA chart with the multiplier */
+function populateDTARowAndColumn(dtaChart: number[][], rowCol: number, multiplier: number) {
+  for (let i = 1; i < dtaChart.length; i++) {
+    if (rowCol !== i) {
+      dtaChart[rowCol][i] *= multiplier;
+      dtaChart[i][rowCol] *= multiplier;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------------------------- */
+/*                                    MAIN FUNCTIONS                                           */
+/* ------------------------------------------------------------------------------------------- */
+
 
 /* Capitalizes the given string */
 export function capitalize(s: string, delimiter='-') {
@@ -43,45 +63,48 @@ export function convertUnits(height: number, weight: number) {
   return [m, ftIn, kg, lbs];
 }
 
-/* Given a Pokemon's types, return its type defenses chart */
-const TYPES = [
-  'normal',
-  'fighting', 
-  'flying', 
-  'poison', 
-  'ground', 
-  'rock', 
-  'bug', 
-  'ghost', 
-  'steel', 
-  'fire', 
-  'water', 
-  'grass', 
-  'electric', 
-  'psychic', 
-  'ice', 
-  'dragon', 
-  'dark', 
-  'fairy'
-];
-export function generateTypeDefenses(types: Type[]) {
-  // Initialize the type_defenses object with all 1
-  let type_defenses = {} as { [key: string] : number};
-  for (let name of TYPES) {
-    type_defenses[name] = 1;
-  }
+export function generateTypeDefenses(pokemonTypes: Type[], allTypes: SimpleType[]) {
+  // To make type IDs match index, bump length up by 1
+  let type_defenses = allTypes.map((_) => 1);
+  type_defenses.push(1);
   // Parse through each of the Pokemon's types and adjust its type defenses according to each damage relation
-  for (let type of types) {
+  for (let type of pokemonTypes) {
     for (let double of type.double_damage_from) {
-      type_defenses[double.name] *= 2;
+      type_defenses[double.id] *= 2;
     }
     for (let half of type.half_damage_from) {
-      type_defenses[half.name] *= 0.5;
+      type_defenses[half.id] *= 0.5;
     }
     for (let no of type.no_damage_from) {
-      type_defenses[no.name] *= 0;
+      type_defenses[no.id] *= 0;
     }
   }
   return type_defenses;
 }
-export { TYPES };
+
+/* Given a Pokemon's damage relations and a list of all Pokemon types, return it's dual-type attack chart */
+export function generateDTAChart(type: Type, allTypes: SimpleType[]) {
+  // To make type IDs match index, bump length and width up by 1 
+  let dtaChart = [];
+  let initializedRow = allTypes.map((_) => 1);
+  initializedRow.push(1);
+  // Initialize dtaChart
+  for (let i = 0; i < allTypes.length+1; i++) {
+    dtaChart[i] = structuredClone(initializedRow);
+  }
+  // Anywhere row === col is invalid because it means the intersection of the same type
+  for (let i = 0; i < allTypes.length+1; i++) {
+    dtaChart[i][i] = -1;
+  }
+  // Populate with damage multipliers
+  for (let relation of type.double_damage_to) {
+    populateDTARowAndColumn(dtaChart, relation.id-1, 2);
+  }
+  for (let relation of type.half_damage_to) {
+    populateDTARowAndColumn(dtaChart, relation.id-1, 0.5);
+  }
+  for (let relation of type.no_damage_to) {
+    populateDTARowAndColumn(dtaChart, relation.id-1, 0);
+  }
+  return dtaChart;
+}
