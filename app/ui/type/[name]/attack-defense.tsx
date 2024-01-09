@@ -1,8 +1,7 @@
-import Link from "next/navigation";
 import { Type } from "@/app/lib/definitions";
 import { Type as SimpleType } from "@prisma/client";
 import { capitalize } from "@/app/lib/utils";
-import TypeIcon from "@/app/ui/type-icon";
+import TypeIcon from "@/app/ui/type/type-icon";
 
 export default function AttackDefense({ type } : { type: Type}) {
   
@@ -22,7 +21,7 @@ export default function AttackDefense({ type } : { type: Type}) {
   
   return (
     <div className="flex flex-col">
-      <h2 className="text-4xl font-bold">Attack <span className="text-gray-600 italic">pros & cons</span></h2>
+      <h2 className="section-header">Attack <span className="text-gray-600 italic">pros & cons</span></h2>
       {type.double_damage_to.length > 0 && (
         <div>
           <p><span className="italic">{capitalize(type.name)}</span> moves are super-effective against:</p>
@@ -32,7 +31,7 @@ export default function AttackDefense({ type } : { type: Type}) {
       {type.half_damage_to.length > 0 && (
         <div>
           <p><span className="italic">{capitalize(type.name)}</span> moves are not very effective against:</p>
-        {buildTypeIconsList(type.half_damage_to)}
+          {buildTypeIconsList(type.half_damage_to)}
         </div>
       )}
       {type.no_damage_to.length > 0 && (
@@ -42,7 +41,7 @@ export default function AttackDefense({ type } : { type: Type}) {
         </div>
       )}
       
-      <h2 className="text-4xl font-bold">Defense <span className="text-gray-600 italic">pros & cons</span></h2>
+      <h2 className="section-header">Defense <span className="text-gray-600 italic">pros & cons</span></h2>
       {type.no_damage_from.length > 0 && (
         <div>
           <p>These types have no effect against <span className="italic">{capitalize(type.name)}</span> Pokémon:</p>
