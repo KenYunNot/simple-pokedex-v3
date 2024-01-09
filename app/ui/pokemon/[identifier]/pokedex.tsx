@@ -1,5 +1,5 @@
-import Section from "@/app/ui/pokemon/[identifier]/data-section";
-import TypeIcon from "@/app/ui/type-icon";
+import Section from "@/app/ui/data-section";
+import TypeIcon from "@/app/ui/type/type-icon";
 import { Pokemon } from "@/app/lib/definitions";
 import { capitalize, convertUnits } from "@/app/lib/utils";
 

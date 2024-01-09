@@ -1,4 +1,4 @@
-import Section from "@/app/ui/pokemon/[identifier]/data-section";
+import Section from "@/app/ui/data-section";
 import { Pokemon } from "@/app/lib/definitions";
 
 export default function BreedingData({ pokemon } : { pokemon : Pokemon }) {

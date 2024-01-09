@@ -6,7 +6,7 @@ export default function TypeIcon({ type, shortened, link } : { type: Type | Simp
   const iconStyle = clsx(
     "flex justify-center items-center text-white text-xs border border-gray-400 rounded text-shadow",
     {
-      "w-20 h-8 mx-1 font-bold" : shortened === false || shortened === undefined,
+      "w-20 h-8 font-bold" : shortened === false || shortened === undefined,
       "w-8 h-8 font-semibold" : shortened === true,
       "hover:opacity-80" : link === true,
     }
