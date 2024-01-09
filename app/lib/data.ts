@@ -167,7 +167,11 @@ export async function countPokemonPages(query: string) {
 /* Fetch all Pokemon types (simple format) */
 export async function fetchTypes() {
   try {
-    let types = await prisma.type.findMany();
+    let types = await prisma.type.findMany({
+      orderBy: {
+        id: 'asc',
+      }
+    });
     return types;
   } catch (error) {
     console.error("Database Error:", error);
