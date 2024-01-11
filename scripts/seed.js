@@ -261,28 +261,36 @@ async function seedPokemon(start) {
 }
 
 async function adjustData() {
-  for (let i = 10195; i <= 10227; i++) {
-    let pokemon = await prisma.pokemon.findFirst({
+  for (let i = 1; i <= 1025; i++) {
+    let left_full_name, right_full_name;
+    let left = await prisma.pokemonSpecies.findFirst({
+      where: {
+        id: i-1,
+      },
+      select: {
+        full_name: true,
+      }
+    });
+    let right = await prisma.pokemonSpecies.findFirst({
+      where: {
+        id: i+1,
+      },
+      select: {
+        full_name: true,
+      }
+    });
+    left_full_name = left ? left.full_name : undefined;
+    right_full_name = right ? right.full_name : undefined;
+    await prisma.pokemonSpecies.update({
       where: {
         id: i,
-        name: {
-          contains: "gmax",
-        }
-      },
-      include: {
-        species: true,
-      }
-    });
-    if (!pokemon) throw new Error("Couldn't find Pokemon");
-    await prisma.pokemon.update({
-      where: {
-        id: pokemon.id,
       },
       data: {
-        form_name: "Gigantamax " + pokemon.species.full_name,
+        left_full_name,
+        right_full_name,
       }
     });
-    console.log(pokemon.id);
+    console.log("Updated left and right for Pokemon", i);
   }
   console.log("Adjusted data");
 }
