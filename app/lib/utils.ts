@@ -39,7 +39,7 @@ export function generatePagination(currentPage: number, totalPages: number) {
 
   // If current page is within the first three pages, display the first three pages, an ellipsis, and the last two pages.
   if (currentPage <= 3)
-    return [...Array.from({ length: currentPage + 2 }, (_, i) => i + 1), '...', totalPages-1, totalPages];
+    return [1, 2, 3, '...', totalPages-1, totalPages];
 
   // If current page is within the last three pages, display the first two pages, an ellipsis, and the last three pages.
   if (currentPage > totalPages-3)
