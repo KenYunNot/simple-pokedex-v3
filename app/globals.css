@@ -4,8 +4,9 @@
 
 
 main {
-  max-width: 60%;
+  max-width: 1220px;
   margin: 1.25rem auto;
+  padding: 0px 18px;
 }
 
 .data-table {
