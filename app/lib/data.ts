@@ -102,7 +102,7 @@ export async function fetchPokemonSpeciesById(id: number) {
 }
 
 /* Given an id number, fetch a Pokemon's full name in its default form (full_name field provided in PokemonSpecies) */
-export async function fetchPokemonNames(id: number) {
+export async function fetchPokemonSpeciesNames(id: number) {
   try {
     let species = await prisma.pokemonSpecies.findFirst({
       where: {
