@@ -24,7 +24,7 @@ export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
                 {pokemon.types.map((type) => {
                   return (
                     <div key={type.name}>
-                      <TypeIcon type={type} link={true} />
+                      <TypeIcon className="mx-0.5" type={type} link={true} />
                     </div>
                   );
                 })}

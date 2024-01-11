@@ -13,25 +13,27 @@ export default async function DualTypeAttack({ type } : { type: Type}) {
   return (
     <div>
       <h2 className="section-header">Dual-type attack <span className="text-gray-600 italic">pros & cons</span></h2>
-      <table className="m-3 border border-collapse">
-        <tbody>
-          <tr className="flex">
-            <th className="w-full"></th>
+      <div className="overflow-x-scroll">
+        <table className="m-3 border border-collapse">
+          <tbody>
+            <tr className="flex">
+              <th className="w-full"></th>
+              {types.map((type) => {
+                return (
+                  <th key={type.name}><TypeIcon type={type} shortened={true} link={true} /></th>
+                );
+              })}
+            </tr>
             {types.map((type) => {
               return (
-                <th key={type.name}><TypeIcon type={type} shortened={true} link={true} /></th>
+                <Fragment key={type.name}>
+                  <DTARow type={type} row={dtaChart[type.id]} />
+                </Fragment>
               );
             })}
-          </tr>
-          {types.map((type) => {
-            return (
-              <Fragment key={type.name}>
-                <DTARow type={type} row={dtaChart[type.id]} />
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

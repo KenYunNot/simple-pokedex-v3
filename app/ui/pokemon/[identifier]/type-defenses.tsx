@@ -42,7 +42,7 @@ function TypeTable({
       {types.slice(start, end).map((type) => {
         return (
           <div className="flex flex-col" key={type.name}>
-            <TypeIcon type={type} shortened={true} />
+            <TypeIcon type={type} shortened={true} link={true} />
             <TypeDamage damage={type_defenses[type.id]} />
           </div>
         );

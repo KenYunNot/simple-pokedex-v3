@@ -7,11 +7,11 @@ export default function AttackDefense({ type } : { type: Type}) {
   
   function buildTypeIconsList(damage_relation: SimpleType[]) {
     return (
-      <div className="flex m-3">
+      <div className="flex flex-wrap m-3">
         {damage_relation.map((relation) => {
           return (
             <div key={relation.name}>
-              <TypeIcon type={relation} link={true} />
+              <TypeIcon className="m-0.5" type={relation} link={true} />
             </div>
           );
         })}

@@ -20,7 +20,7 @@ export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
         {pokemon.types.map((type) => {
           return (
             <div key={type.name}>
-              <TypeIcon type={type} />
+              <TypeIcon className="mx-0.5" type={type} />
             </div>
           );
         })}

@@ -2,7 +2,7 @@ import { Type as SimpleType } from "@prisma/client";
 import { Type } from "@/app/lib/definitions";
 import clsx from "clsx";
 
-export default function TypeIcon({ type, shortened, link } : { type: Type | SimpleType, shortened?: boolean, link?: boolean }) {
+export default function TypeIcon({ type, shortened, link, className } : { type: Type | SimpleType, shortened?: boolean, link?: boolean, className?: string }) {
   const iconStyle = clsx(
     "flex justify-center items-center text-white text-xs border border-gray-400 rounded text-shadow",
     {
@@ -13,7 +13,7 @@ export default function TypeIcon({ type, shortened, link } : { type: Type | Simp
   )
 
   const iconText = shortened ? type.name.slice(0, 3).toUpperCase() : type.name.toUpperCase();
-  const icon = <div className={`${iconStyle} ${type.name}`}>{iconText}</div>;
+  const icon = <div className={`${iconStyle} ${type.name} ${className}`}>{iconText}</div>;
 
   if (link) {
     return (
