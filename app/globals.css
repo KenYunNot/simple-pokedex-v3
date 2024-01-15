@@ -4,7 +4,7 @@
 
 
 main {
-  max-width: 1220px;
+  max-width: 1280px;
   margin: 1.25rem auto;
   padding: 0px 18px;
 }
@@ -48,17 +48,6 @@ main {
 
 .pokemon-panel.active {
   display: block;
-}
-
-.page-header {
-  font-size: 40px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.section-header {
-  font-size: 30px;
-  font-weight: 700;
 }
 
 .bug {
