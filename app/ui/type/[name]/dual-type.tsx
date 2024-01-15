@@ -1,10 +1,11 @@
 import { Type as SimpleType } from "@prisma/client";
 import { Fragment } from "react";
-import { Type } from "@/app/lib/definitions";
 import { fetchTypes } from "@/app/lib/data";
+import { Type } from "@/app/lib/definitions";
 import { generateDTAChart } from "@/app/lib/utils";
-import TypeIcon from "@/app/ui/type/type-icon";
+import SectionHeader from "@/app/ui/section-header";
 import TypeDamage from "@/app/ui/type/type-damage";
+import TypeIcon from "@/app/ui/type/type-icon";
 
 export default async function DualTypeAttack({ type } : { type: Type}) {
   const types = await fetchTypes();
@@ -12,8 +13,8 @@ export default async function DualTypeAttack({ type } : { type: Type}) {
 
   return (
     <div>
-      <h2 className="section-header">Dual-type attack <span className="text-gray-600 italic">pros & cons</span></h2>
-      <div className="overflow-x-scroll">
+      <SectionHeader>Dual-type attack <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
+      <div className="w-fit">
         <table className="m-3 border border-collapse">
           <tbody>
             <tr className="flex">

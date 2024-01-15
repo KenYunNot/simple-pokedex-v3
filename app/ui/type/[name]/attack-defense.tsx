@@ -1,7 +1,9 @@
 import { Type } from "@/app/lib/definitions";
 import { Type as SimpleType } from "@prisma/client";
 import { capitalize } from "@/app/lib/utils";
+import SectionHeader from "@/app/ui/section-header";
 import TypeIcon from "@/app/ui/type/type-icon";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 export default function AttackDefense({ type } : { type: Type}) {
   
@@ -21,9 +23,10 @@ export default function AttackDefense({ type } : { type: Type}) {
   
   return (
     <div className="flex flex-col">
-      <h2 className="section-header">Attack <span className="text-gray-600 italic">pros & cons</span></h2>
+      <SectionHeader>Attack <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
       {type.double_damage_to.length > 0 && (
         <div>
+          <CheckCircleIcon className="w-5 h-5 bg-green-500 text-white rounded-full" />
           <p><span className="italic">{capitalize(type.name)}</span> moves are super-effective against:</p>
           {buildTypeIconsList(type.double_damage_to)}
         </div>
@@ -41,7 +44,7 @@ export default function AttackDefense({ type } : { type: Type}) {
         </div>
       )}
       
-      <h2 className="section-header">Defense <span className="text-gray-600 italic">pros & cons</span></h2>
+      <SectionHeader>Defense <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
       {type.no_damage_from.length > 0 && (
         <div>
           <p>These types have no effect against <span className="italic">{capitalize(type.name)}</span> Pokémon:</p>

@@ -1,9 +1,11 @@
-import Section from "@/app/ui/data-section";
 import { Pokemon } from "@/app/lib/definitions";
+import Section from "@/app/ui/section";
+import SectionHeader from "@/app/ui/section-header";
 
 export default function BreedingData({ pokemon } : { pokemon : Pokemon }) {
   return (
-    <Section header="Breeding">
+    <Section>
+      <SectionHeader>Breeding Data</SectionHeader>
       <table className="data-table">
         <tbody>
           <tr>

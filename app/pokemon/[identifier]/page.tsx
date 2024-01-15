@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PokemonTabs from "@/app/ui/pokemon/[identifier]/pokemon-tabs";
+import { fetchPokemonSpeciesById, fetchPokemonId } from "@/app/lib/data";
+import PageHeader from "@/app/ui/page-header";
 import PokemonPanels from "@/app/ui/pokemon/[identifier]/pokemon-panels";
-import { fetchPokemonSpeciesById, fetchPokemonId, fetchPokemonSpeciesNames } from "@/app/lib/data";
+import PokemonTabs from "@/app/ui/pokemon/[identifier]/pokemon-tabs";
 import { 
   ChevronLeftIcon, 
   ChevronRightIcon, 
@@ -36,9 +37,9 @@ export default async function Pokemon({ params }: { params: { identifier: string
           </Link>
         )}
       </nav>
-      <h1 className="page-header pb-4">
+      <PageHeader>
         {species.full_name}
-      </h1>
+      </PageHeader>
       <PokemonTabs pokemonList={species.pokemon} />
       <PokemonPanels pokemonList={species.pokemon} />
     </div>

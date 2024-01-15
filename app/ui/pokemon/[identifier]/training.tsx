@@ -1,10 +1,12 @@
-import Section from "@/app/ui/data-section";
 import { Pokemon } from "@/app/lib/definitions";
 import { capitalize } from "@/app/lib/utils";
+import Section from "@/app/ui/section";
+import SectionHeader from "@/app/ui/section-header";
 
 export default function TrainingData({ pokemon }: { pokemon: Pokemon }) {
   return (
-    <Section header="Training data">
+    <Section>
+      <SectionHeader>Training Data</SectionHeader>
       <table className="data-table">
         <tbody>
           <tr>

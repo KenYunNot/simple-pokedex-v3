@@ -2,7 +2,8 @@ import { Type } from "@prisma/client";
 import { fetchTypes } from "@/app/lib/data";
 import { Pokemon } from "@/app/lib/definitions";
 import { generateTypeDefenses } from "@/app/lib/utils";
-import Section from "@/app/ui/data-section";
+import Section from "@/app/ui/section";
+import SectionHeader from "@/app/ui/section-header"
 import TypeIcon from "@/app/ui/type/type-icon";
 import TypeDamage from "@/app/ui/type/type-damage";
 
@@ -11,10 +12,11 @@ export default async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
   const type_defenses = generateTypeDefenses(pokemon.types, types);
 
   return (
-    <Section header="Type defenses">
+    <Section>
+      <SectionHeader>Type Defenses</SectionHeader>
       <p>
-        The effectiveness of each type on{" "}
-        <span className="italic">{pokemon.species.full_name}</span>
+        The effectiveness of each type on
+        <span className="italic">{" " + pokemon.species.full_name}</span>
       </p>
       <div className="flex justify-center flex-wrap">
         <TypeTable types={types} type_defenses={type_defenses} start={0} end={types.length/2} />

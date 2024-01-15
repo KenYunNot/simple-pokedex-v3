@@ -1,7 +1,8 @@
-import Section from "@/app/ui/data-section";
-import TypeIcon from "@/app/ui/type/type-icon";
 import { Pokemon } from "@/app/lib/definitions";
 import { capitalize, convertUnits } from "@/app/lib/utils";
+import Section from "@/app/ui/section";
+import SectionHeader from "@/app/ui/section-header";
+import TypeIcon from "@/app/ui/type/type-icon";
 
 export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
   const [meters, feet, kilograms, pounds] = convertUnits(
@@ -10,7 +11,8 @@ export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
   );
 
   return (
-    <Section header="Pokédex data">
+    <Section>
+      <SectionHeader>Pokedex Data</SectionHeader>
       <table className="data-table">
         <tbody>
           <tr>
