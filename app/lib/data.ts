@@ -17,17 +17,7 @@ export async function fetchPokemon(
       },
       include: {
         species: true,
-        types: {
-          include: {
-            double_damage_from: true,
-            double_damage_to: true,
-            half_damage_from: true,
-            half_damage_to: true,
-            no_damage_from: true,
-            no_damage_to: true,
-            pokemon: true,
-          }
-        },
+        types: true,
       },
       skip: offset,
       take: ITEMS_PER_PAGE,
@@ -139,6 +129,42 @@ export async function fetchPokemonId(identifier: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(`Failed to fetch Pokemon ID for \'${identifier}\'`);
+  }
+}
+
+/* Fetch a number of random Pokemon */
+export async function fetchRandomPokemon() {
+  const COUNT = 10;
+  try {
+    let aggregations = await prisma.pokemon.aggregate({
+      _count: {
+        id: true,
+      },
+      where: {
+        is_default: true,
+      }
+    });
+    let numPokemon = aggregations._count.id;
+    let randomIds = [];
+    for (let i = 0; i < COUNT; i++) {
+      let randomId = Math.floor(Math.random() * numPokemon);
+      randomIds.push(randomId);
+    }
+    let randomPokemon = await prisma.pokemon.findMany({
+      where: {
+        id: {
+          in: randomIds,
+        },
+      },
+      include: {
+        species: true,
+        types: true,
+      }
+    });
+    return randomPokemon;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error(`Failed to fetch Pokemon`);
   }
 }
 
