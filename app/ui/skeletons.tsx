@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export function PokemonCardSkeleton() {
   return (
@@ -21,9 +20,9 @@ export function PokemonCardSkeleton() {
 export function PokemonSpeciesSkeleton() {
   return (
     <div className="m-4">
-      <div className="flex justify-between w-full my-1 px-2">
-        <div className="h-5 w-48 bg-gray-200 rounded-md" />
-        <div className="h-5 w-48 bg-gray-200 rounded-md" />
+      <div className="w-full table clear-both my-1 px-2">
+        <div className="my-0.5 h-5 w-48 bg-gray-200 float-left rounded-md" />
+        <div className="my-0.5 h-5 w-48 bg-gray-200 float-right rounded-md" />
       </div>
       <div className="flex justify-center pb-4 border-b">
         <div className="h-14 w-80 bg-gray-200 rounded-md" />
