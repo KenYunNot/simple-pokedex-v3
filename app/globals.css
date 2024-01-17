@@ -24,32 +24,6 @@ main {
   padding: 8px 10px;
 }
 
-.pokemon-tab {
-  margin: 0 4px -1px 4px;
-  padding: 3px 8px;
-  background-color: #D1D5DB;
-  border: 1px solid #6B7280;
-  border-radius: 6px 6px 0 0;
-}
-
-.pokemon-tab:hover {
-  background-color: #9CA3AF;
-  cursor: pointer;
-}
-
-.pokemon-tab.active {
-  background-color: white;
-  pointer-events: none;
-}
-
-.pokemon-panel {
-  display: none;
-}
-
-.pokemon-panel.active {
-  display: block;
-}
-
 .bug {
   background-color: rgb(142, 165, 10); 
 }
