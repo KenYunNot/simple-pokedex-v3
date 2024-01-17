@@ -1,21 +1,23 @@
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonFull } from "@/app/lib/definitions";
 import Image from "next/image";
 import PokedexData from "@/app/ui/pokemon/[identifier]/pokedex";
 import TrainingData from "@/app/ui/pokemon/[identifier]/training";
 import TypeDefenses from "@/app/ui/pokemon/[identifier]/type-defenses";
 import BreedingData from "@/app/ui/pokemon/[identifier]/breeding";
+import clsx from "clsx";
 
 export default function PokemonPanels({
   pokemonList,
 }: {
-  pokemonList: Pokemon[];
+  pokemonList: PokemonFull[];
 }) {
   return (
     <div>
       {pokemonList.map((pokemon, index) => {
         return (
           <div
-            className={`pokemon-panel ${pokemon.name} ${index === 0 ? "active" : ""}`}
+            id={`panel-${index}`}
+            className={index !== 0 ? "hidden" : ""}
             key={pokemon.id}
           >
             <Image

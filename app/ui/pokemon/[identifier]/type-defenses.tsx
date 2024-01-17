@@ -1,13 +1,13 @@
 import { Type } from "@prisma/client";
 import { fetchTypes } from "@/app/lib/data";
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonFull } from "@/app/lib/definitions";
 import { generateTypeDefenses } from "@/app/lib/utils";
 import Section from "@/app/ui/section";
 import SectionHeader from "@/app/ui/section-header"
 import TypeIcon from "@/app/ui/type/type-icon";
 import TypeDamage from "@/app/ui/type/type-damage";
 
-export default async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
+export default async function TypeDefenses({ pokemon }: { pokemon: PokemonFull }) {
   const types = await fetchTypes();
   const type_defenses = generateTypeDefenses(pokemon.types, types);
 

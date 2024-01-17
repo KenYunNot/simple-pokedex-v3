@@ -1,10 +1,10 @@
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonFull } from "@/app/lib/definitions";
 import { capitalize, convertUnits } from "@/app/lib/utils";
 import Section from "@/app/ui/section";
 import SectionHeader from "@/app/ui/section-header";
 import TypeIcon from "@/app/ui/type/type-icon";
 
-export default async function PokedexData({ pokemon } : { pokemon : Pokemon }) {
+export default async function PokedexData({ pokemon } : { pokemon : PokemonFull }) {
   const [meters, feet, kilograms, pounds] = convertUnits(
     pokemon.height,
     pokemon.weight

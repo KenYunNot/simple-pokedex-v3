@@ -1,8 +1,8 @@
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonFull } from "@/app/lib/definitions";
 import Section from "@/app/ui/section";
 import SectionHeader from "@/app/ui/section-header";
 
-export default function BreedingData({ pokemon } : { pokemon : Pokemon }) {
+export default function BreedingData({ pokemon } : { pokemon : PokemonFull }) {
   return (
     <Section>
       <SectionHeader>Breeding Data</SectionHeader>

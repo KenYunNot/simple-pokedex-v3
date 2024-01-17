@@ -1,9 +1,9 @@
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonFull } from "@/app/lib/definitions";
 import { capitalize } from "@/app/lib/utils";
 import Section from "@/app/ui/section";
 import SectionHeader from "@/app/ui/section-header";
 
-export default function TrainingData({ pokemon }: { pokemon: Pokemon }) {
+export default function TrainingData({ pokemon }: { pokemon: PokemonFull }) {
   return (
     <Section>
       <SectionHeader>Training Data</SectionHeader>

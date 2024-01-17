@@ -1,8 +1,8 @@
 import Image from "next/image";
 import TypeIcon from "@/app/ui/type/type-icon";
-import { Pokemon } from "@/app/lib/definitions"
+import { PokemonDetailed } from "@/app/lib/definitions"
 
-export default async function PokemonCard({ pokemon } : { pokemon : Pokemon }) {
+export default async function PokemonCard({ pokemon } : { pokemon : PokemonDetailed }) {
   return (
     <div className="flex flex-col items-center h-min py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-300">
       <div className="flex justify-between w-full px-3">
