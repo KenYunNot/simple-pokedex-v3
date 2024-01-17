@@ -261,36 +261,18 @@ async function seedPokemon(start) {
 }
 
 async function adjustData() {
-  for (let i = 1; i <= 1025; i++) {
-    let left_full_name, right_full_name;
-    let left = await prisma.pokemonSpecies.findFirst({
-      where: {
-        id: i-1,
-      },
-      select: {
-        full_name: true,
-      }
-    });
-    let right = await prisma.pokemonSpecies.findFirst({
-      where: {
-        id: i+1,
-      },
-      select: {
-        full_name: true,
-      }
-    });
-    left_full_name = left ? left.full_name : undefined;
-    right_full_name = right ? right.full_name : undefined;
+  for (let i = 10001; i <= 10276; i++) {
     await prisma.pokemonSpecies.update({
       where: {
-        id: i,
+        id: 20,
       },
       data: {
-        left_full_name,
-        right_full_name,
+        pokemon: {
+          disconnect: [{id: 10092}],
+        }
       }
-    });
-    console.log("Updated left and right for Pokemon", i);
+    })
+    console.log("Disconnected");
   }
   console.log("Adjusted data");
 }
