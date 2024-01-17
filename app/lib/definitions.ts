@@ -1,6 +1,13 @@
 import { Prisma } from "@prisma/client";
 
-export type Pokemon = Prisma.PokemonGetPayload<{
+export type PokemonDetailed = Prisma.PokemonGetPayload<{
+  include: {
+    species: true,
+    types: true,
+  }
+}>;
+
+export type PokemonFull = Prisma.PokemonGetPayload<{
   include: {
     species: true,
     types: {
@@ -17,7 +24,18 @@ export type Pokemon = Prisma.PokemonGetPayload<{
   }
 }>;
 
-export type PokemonSpecies = Prisma.PokemonSpeciesGetPayload<{
+export type PokemonSpeciesDetailed = Prisma.PokemonSpeciesGetPayload<{
+  include: {
+    pokemon: {
+      include: {
+        species: true,
+        types: true,
+      }
+    }
+  }
+}>;
+
+export type PokemonSpeciesFull = Prisma.PokemonSpeciesGetPayload<{
   include: {
     pokemon: {
       include: {
@@ -38,7 +56,7 @@ export type PokemonSpecies = Prisma.PokemonSpeciesGetPayload<{
   }
 }>;
 
-export type Type = Prisma.TypeGetPayload<{
+export type TypeFull = Prisma.TypeGetPayload<{
   include: {
     double_damage_from: true,
     double_damage_to: true,
