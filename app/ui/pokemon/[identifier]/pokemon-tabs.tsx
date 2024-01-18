@@ -19,9 +19,16 @@ export default function PokemonTabs({
     setActiveTab(tab);
   }
 
+  const divStyle = clsx(
+    "flex flex-col border-b border-gray-500",
+    {
+      "xs:flex-row" : pokemonList.length <= 3,
+      "sm:flex-row" : pokemonList.length > 3,
+    },
+  )
+
   return (
-    <div className="flex flex-col border-b border-gray-500
-      xs:flex-row">
+    <div className={divStyle}>
       {pokemonList.length > 1 && pokemonList.map((pokemon, index) => {
         const tabStyle = clsx(
           "mx-1 -mb-px px-2 py-1 border border-gray-500 rounded-t-md text-center\
