@@ -17,7 +17,7 @@ export default function TypeIcon({ type, shortened, link, className } : { type: 
 
   if (link) {
     return (
-      <a href={`/type/${type.name}`}>
+      <a href={`/types/${type.name}`}>
         {icon}
       </a>
     );
