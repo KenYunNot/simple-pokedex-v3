@@ -1,5 +1,5 @@
-import { Type } from "@/app/lib/definitions";
-import { Type as SimpleType } from "@prisma/client";
+import { TypeFull } from "@/app/lib/definitions";
+import { Type } from "@prisma/client";
 
 /* ------------------------------------------------------------------------------------------- */
 /*                                   HELPER FUNCTIONS                                          */
@@ -63,7 +63,7 @@ export function convertUnits(height: number, weight: number) {
   return [m, ftIn, kg, lbs];
 }
 
-export function generateTypeDefenses(pokemonTypes: Type[], allTypes: SimpleType[]) {
+export function generateTypeDefenses(pokemonTypes: TypeFull[], allTypes: Type[]) {
   // To make type IDs match index, bump length up by 1
   let type_defenses = allTypes.map((_) => 1);
   type_defenses.push(1);
@@ -83,7 +83,7 @@ export function generateTypeDefenses(pokemonTypes: Type[], allTypes: SimpleType[
 }
 
 /* Given a Pokemon's damage relations and a list of all Pokemon types, return it's dual-type attack chart */
-export function generateDTAChart(type: Type, allTypes: SimpleType[]) {
+export function generateDTAChart(type: TypeFull, allTypes: Type[]) {
   // To make type IDs match index, bump length and width up by 1 
   let dtaChart = [];
   let initializedRow = allTypes.map((_) => 1);

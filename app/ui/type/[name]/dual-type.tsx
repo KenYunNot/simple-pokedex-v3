@@ -1,13 +1,13 @@
-import { Type as SimpleType } from "@prisma/client";
+import { Type } from "@prisma/client";
 import { Fragment } from "react";
 import { fetchTypes } from "@/app/lib/data";
-import { Type } from "@/app/lib/definitions";
+import { TypeFull } from "@/app/lib/definitions";
 import { generateDTAChart } from "@/app/lib/utils";
 import SectionHeader from "@/app/ui/section-header";
 import TypeDamage from "@/app/ui/type/type-damage";
 import TypeIcon from "@/app/ui/type/type-icon";
 
-export default async function DualTypeAttack({ type } : { type: Type}) {
+export default async function DualTypeAttack({ type } : { type: TypeFull}) {
   const types = await fetchTypes();
   const dtaChart = generateDTAChart(type, types);
 
@@ -43,7 +43,7 @@ function DTARow({
   type,
   row,
 } : {
-  type: SimpleType,
+  type: Type,
   row: number[],
 }) {
   

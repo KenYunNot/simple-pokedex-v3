@@ -1,13 +1,13 @@
-import { Type } from "@/app/lib/definitions";
-import { Type as SimpleType } from "@prisma/client";
+import { TypeFull } from "@/app/lib/definitions";
+import { Type } from "@prisma/client";
 import { capitalize } from "@/app/lib/utils";
 import SectionHeader from "@/app/ui/section-header";
 import TypeIcon from "@/app/ui/type/type-icon";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
-export default function AttackDefense({ type } : { type: Type}) {
+export default function AttackDefense({ type } : { type: TypeFull}) {
   
-  function buildTypeIconsList(damage_relation: SimpleType[]) {
+  function buildTypeIconsList(damage_relation: Type[]) {
     return (
       <div className="flex flex-wrap m-3">
         {damage_relation.map((relation) => {

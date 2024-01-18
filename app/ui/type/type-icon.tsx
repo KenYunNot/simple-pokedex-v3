@@ -1,8 +1,8 @@
-import { Type as SimpleType } from "@prisma/client";
-import { Type } from "@/app/lib/definitions";
+import { Type } from "@prisma/client";
+import { TypeFull } from "@/app/lib/definitions";
 import clsx from "clsx";
 
-export default function TypeIcon({ type, shortened, link, className } : { type: Type | SimpleType, shortened?: boolean, link?: boolean, className?: string }) {
+export default function TypeIcon({ type, shortened, link, className } : { type: TypeFull | Type, shortened?: boolean, link?: boolean, className?: string }) {
   const iconStyle = clsx(
     "flex justify-center items-center text-white text-xs border border-gray-400 rounded text-shadow",
     {

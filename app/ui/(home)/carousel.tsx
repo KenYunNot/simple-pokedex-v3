@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { fetchRandomPokemon } from "@/app/lib/data"
-import { Pokemon } from "@/app/lib/definitions";
+import { PokemonDetailed } from "@/app/lib/definitions";
 import TypeIcon from "@/app/ui/type/type-icon";
 import clsx from "clsx";
 
@@ -11,7 +12,11 @@ export default async function Carousel() {
     <ul className="flex justify-center">
       {randomPokemon.map((pokemon, index) => {
         if (index !== 0) {
-          return <ShortenedCarouselItem pokemon={pokemon} />
+          return (
+            <Fragment key={pokemon.id}>
+              <ShortenedCarouselItem pokemon={pokemon} />
+            </Fragment>
+          )
         }
         
       })}
@@ -19,7 +24,7 @@ export default async function Carousel() {
   )
 }
 
-function CarouselItem({ pokemon } : { pokemon: Pokemon }) {
+function CarouselItem({ pokemon } : { pokemon: PokemonDetailed }) {
   return (
     <div className="w-64 h-64 active" key={pokemon.id}>
       <Image 
@@ -33,7 +38,9 @@ function CarouselItem({ pokemon } : { pokemon: Pokemon }) {
       <div className="flex">
         {pokemon.types.map((type) => {
           return (
-            <TypeIcon type={type} />
+            <Fragment key={type.id}>
+              <TypeIcon type={type} />
+            </Fragment>
           )
         })}
       </div>
@@ -45,7 +52,7 @@ function CarouselItem({ pokemon } : { pokemon: Pokemon }) {
   );
 }
 
-function ShortenedCarouselItem({ pokemon } : { pokemon: Pokemon }) {
+function ShortenedCarouselItem({ pokemon } : { pokemon: PokemonDetailed }) {
   return (
     <div className="w-52 h-52" key={pokemon.id}>
       <Image 
