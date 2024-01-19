@@ -24,6 +24,36 @@ main {
   padding: 8px 10px;
 }
 
+.slider-container {
+  position: relative;
+  height: 560px;
+  overflow-x: clip;
+}
+
+.slider {
+  display: flex;
+  width: 7000px;
+  border-top: 4px;
+  border-style: solid;
+  border-color: #1F2937;
+}
+
+.slider-button {
+  position: absolute;
+  top: 25%;
+  width: 75px;
+  height: 75px;
+  z-index: 5;
+}
+
+.slider-button.right {
+  right: 5%;
+}
+
+.slider-button.left {
+  left: 5%
+}
+
 .bug {
   background-color: rgb(142, 165, 10); 
 }
