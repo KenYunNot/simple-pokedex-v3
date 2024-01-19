@@ -1,6 +1,19 @@
+import { Fragment } from "react";
+import { fetchTypes } from "@/app/lib/data";
+import TypeIcon from "@/app/ui/type/type-icon";
 
-export default function TypeList() {
+export default async function TypeList() {
+  const types = await fetchTypes(); 
+
   return (
-    <div>Type List</div>
+    <div className="flex flex-wrap">
+      {types.map((type) => {
+        return (
+          <Fragment key={type.name}>
+            <TypeIcon type={type} link={true} />
+          </Fragment>
+        )
+      })}
+    </div>
   )
 }
