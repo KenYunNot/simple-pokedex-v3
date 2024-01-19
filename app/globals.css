@@ -43,7 +43,15 @@ main {
   top: 25%;
   width: 75px;
   height: 75px;
+  color: white;
+  background-color: #6B7280;
+  opacity: 70%;
+  border-radius: 8px;
   z-index: 5;
+}
+
+.slider-button:hover {
+  opacity: 100%;
 }
 
 .slider-button.right {
