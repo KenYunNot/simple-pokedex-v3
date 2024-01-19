@@ -1,9 +1,12 @@
-import Carousel from "@/app/ui/(home)/carousel";
+import { fetchRandomPokemon } from "@/app/lib/data";
+import Slider from "@/app/ui/(home)/slider";
 
-export default function Home() {
+export default async function Home() {
+  const featuredPokemon = await fetchRandomPokemon();
+
   return (
     <div>
-      <Carousel />
+      <Slider pokemonList={featuredPokemon} />
     </div>
   )
 }
