@@ -148,6 +148,9 @@ export async function fetchRandomPokemon() {
     let randomIds = [];
     for (let i = 0; i < COUNT; i++) {
       let randomId = Math.floor(Math.random() * numPokemon);
+      while (randomId in randomIds) {
+        randomId = Math.floor(Math.random() * numPokemon);
+      }
       randomIds.push(randomId);
     }
     let randomPokemon = await prisma.pokemon.findMany({
