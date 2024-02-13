@@ -5,7 +5,7 @@ export default async function Home() {
   const featuredPokemon = await fetchRandomPokemon();
 
   return (
-    <div>
+    <div className="py-3">
       <Slider pokemonList={featuredPokemon} />
     </div>
   )
