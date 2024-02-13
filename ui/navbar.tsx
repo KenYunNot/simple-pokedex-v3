@@ -65,7 +65,7 @@ export default function Navbar() {
           );
         })}
         <button
-          className="px-5 py-3 bg-yellow-500 text-white font-bold rounded-full hover:bg-yellow-600"
+          className="mx-3 px-5 py-3 bg-yellow-500 text-white font-bold rounded-full hover:bg-yellow-600"
           onClick={() => signOut()}
         >
           Sign Out
