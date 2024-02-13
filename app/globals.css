@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-main {
-  max-width: 1280px;
-  margin: 1.25rem auto;
-  padding: 0px 18px;
-}
-
 .data-table {
   width: 100%;
   font-size: 15px;
@@ -36,6 +29,7 @@ main {
   border-top: 4px;
   border-style: solid;
   border-color: #1F2937;
+  transition: 200ms;
 }
 
 .slider-button {

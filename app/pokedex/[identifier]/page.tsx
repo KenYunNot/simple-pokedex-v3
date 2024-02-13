@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchPokemonSpeciesById, fetchPokemonId } from "@/app/lib/data";
-import PageHeader from "@/app/ui/page-header";
-import PokemonPanels from "@/app/ui/pokemon/[identifier]/pokemon-panels";
-import PokemonTabs from "@/app/ui/pokemon/[identifier]/pokemon-tabs";
+import { fetchPokemonSpeciesById, fetchPokemonId } from "@/lib/data";
+import PageHeader from "@/ui/page-header";
+import PokemonPanels from "@/ui/pokemon/[identifier]/pokemon-panels";
+import PokemonTabs from "@/ui/pokemon/[identifier]/pokemon-tabs";
 import { 
   ChevronLeftIcon, 
   ChevronRightIcon, 

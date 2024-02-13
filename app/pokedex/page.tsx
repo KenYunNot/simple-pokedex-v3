@@ -1,11 +1,11 @@
 import Link from "next/link";
-import Search from "@/app/ui/search";
-import Pagination from "@/app/ui/pagination";
-import PokemonCard from "@/app/ui/pokemon/pokemon-card";
+import Search from "@/ui/search";
+import Pagination from "@/ui/pagination";
+import PokemonCard from "@/ui/pokemon/pokemon-card";
 import { 
   fetchPokemon,
   countPokemonPages, 
-} from "@/app/lib/data";
+} from "@/lib/data";
 
 export default async function PokemonList({
   searchParams,

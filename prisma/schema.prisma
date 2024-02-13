@@ -9,6 +9,15 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
 model Pokemon {
   id         Int            @id
   name       String         @db.VarChar(255)
@@ -28,8 +37,8 @@ model PokemonSpecies {
   id              Int       @id
   name            String    @db.VarChar(255)
   full_name       String    @db.VarChar(255)
-  left_name       String?   
-  right_name      String?   
+  left_name       String?
+  right_name      String?
   left_full_name  String?
   right_full_name String?
   base_happiness  Int

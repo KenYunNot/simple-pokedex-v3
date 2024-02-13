@@ -1,7 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const bcrypt = require("bcrypt");
-const { collectGenerateParams } = require("next/dist/build/utils");
+// const bcrypt = require("bcrypt");
 
 /* ------------------------------------------------------------------------------------------- */
 /*                                   HELPER FUNCTIONS                                          */
@@ -261,19 +260,13 @@ async function seedPokemon(start) {
 }
 
 async function adjustData() {
-  for (let i = 10001; i <= 10276; i++) {
-    await prisma.pokemonSpecies.update({
-      where: {
-        id: 20,
-      },
-      data: {
-        pokemon: {
-          disconnect: [{id: 10092}],
-        }
+  await prisma.pokemonSpecies.deleteMany({
+    where: {
+      id: {
+        gt: 100,
       }
-    })
-    console.log("Disconnected");
-  }
+    }
+  });
   console.log("Adjusted data");
 }
 

@@ -1,4 +1,4 @@
-import { SpeciesListPageSkeleton } from "@/app/ui/skeletons"
+import { SpeciesListPageSkeleton } from "@/ui/skeletons"
 
 export default function Loading() {
   return (
