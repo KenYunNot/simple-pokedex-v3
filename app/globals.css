@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-image: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, #e7e7e7 2px, #e7e7e7 11px);
+}
+
 .data-table {
   width: 100%;
   font-size: 15px;
