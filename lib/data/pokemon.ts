@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { cache } from "react";
 
 
 const ITEMS_PER_PAGE = 16;
@@ -7,6 +8,7 @@ export async function fetchPokemon(
   query: string,
   page: number,
 ) {
+  console.log("Fetched the pokemon");
   const offset = ITEMS_PER_PAGE * (page - 1);
   try {
     let pokemon = await prisma.pokemon.findMany({
@@ -59,9 +61,11 @@ export async function fetchPokemonById(id: number) {
   }
 }
 
-/* Fetch a number of random Pokemon */
-export async function fetchRandomPokemon() {
-  const COUNT = 10;
+/**
+ * Fetch a number of random Pokemon
+ * @returns 
+ */
+async function frp(count=10) {
   try {
     let aggregations = await prisma.pokemon.aggregate({
       _count: {
@@ -73,7 +77,7 @@ export async function fetchRandomPokemon() {
     });
     let numPokemon = aggregations._count.id;
     let randomIds = [];
-    for (let i = 0; i < COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       let randomId = Math.floor(Math.random() * numPokemon);
       while (randomId in randomIds) {
         randomId = Math.floor(Math.random() * numPokemon);
@@ -97,6 +101,8 @@ export async function fetchRandomPokemon() {
     throw new Error(`Failed to fetch Pokemon`);
   }
 }
+export const fetchRandomPokemon = cache(frp);
+
 
 /**
  * Given an identifier either in the form of a number id or a string name, return the corresponding Pokemon's id

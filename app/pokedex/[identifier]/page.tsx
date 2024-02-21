@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchPokemonSpeciesById, fetchPokemonId } from "@/lib/data";
+import { findPokemonId } from "@/lib/data/pokemon";
+import { fetchPokemonSpeciesById } from "@/lib/data/pokemonSpecies";
 import PageHeader from "@/ui/page-header";
 import PokemonPanels from "@/ui/pokemon/[identifier]/pokemon-panels";
 import PokemonTabs from "@/ui/pokemon/[identifier]/pokemon-tabs";
@@ -11,7 +12,7 @@ import {
 
 export default async function Pokemon({ params }: { params: { identifier: string } }) {
   const identifier = params.identifier;
-  const id = await fetchPokemonId(identifier);
+  const id = await findPokemonId(identifier);
   const species = await fetchPokemonSpeciesById(id);
 
   // If the Pokemon species is not found, redirect to not found page
