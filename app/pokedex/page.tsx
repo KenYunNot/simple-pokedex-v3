@@ -5,7 +5,7 @@ import PokemonCard from "@/ui/pokemon/pokemon-card";
 import { 
   fetchPokemon,
   countPokemonPages, 
-} from "@/lib/data";
+} from "@/lib/data/pokemon";
 
 export default async function PokemonList({
   searchParams,
