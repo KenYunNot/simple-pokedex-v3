@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { fetchTypeByName } from "@/lib/data";
+import { fetchTypeByName } from "@/lib/data/types";
 import { capitalize } from "@/lib/utils";
 import AttackDefense from "@/ui/type/[name]/attack-defense";
 import DualTypeAttack from "@/ui/type/[name]/dual-type";

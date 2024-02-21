@@ -1,5 +1,5 @@
 import { Type } from "@prisma/client";
-import { fetchTypes } from "@/lib/data";
+import { fetchTypes } from "@/lib/data/types";
 import { PokemonFull } from "@/lib/definitions";
 import { generateTypeDefenses } from "@/lib/utils";
 import Section from "@/ui/section";

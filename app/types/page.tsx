@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { fetchTypes } from "@/lib/data";
+import { fetchTypes } from "@/lib/data/types";
 import TypeIcon from "@/ui/type/type-icon";
 
 export default async function TypeList() {

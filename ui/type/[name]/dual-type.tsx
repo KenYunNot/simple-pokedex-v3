@@ -1,6 +1,6 @@
 import { Type } from "@prisma/client";
 import { Fragment } from "react";
-import { fetchTypes } from "@/lib/data";
+import { fetchTypes } from "@/lib/data/types";
 import { TypeFull } from "@/lib/definitions";
 import { generateDTAChart } from "@/lib/utils";
 import SectionHeader from "@/ui/section-header";
