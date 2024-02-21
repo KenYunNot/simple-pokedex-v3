@@ -21,7 +21,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <main className='min-h-screen mx-[auto] my-3 px-10 py-8 max-w-7xl bg-white rounded'>
+        <main className='min-h-screen mx-[auto] px-3 py-8 max-w-7xl bg-white rounded'>
           {children}
         </main>
       </body>
