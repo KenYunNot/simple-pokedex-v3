@@ -28,7 +28,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <form action={onSubmit} className='flex flex-col w-96 items-center p-4 bg-gray-500 rounded-md'>
+    <form action={onSubmit} className='flex flex-col w-50 items-center p-4 bg-gray-500 rounded-md'>
       {error && (
         <div className="mb-3 px-5 py-3 bg-red-400 text-center text-white font-bold rounded-md">
           {error}
@@ -48,8 +48,8 @@ export default function RegisterForm() {
       <button type="submit" className='w-full h-14 mb-3 text-2xl text-white font-semibold bg-blue-400 border-b-4 border-blue-500 rounded-md duration-200 hover:bg-blue-500 hover:border-blue-600'>
         Sign Up
       </button>
-      <p className="my-2 text-white font-semibold">
-        Already a user? <Link href="/login" className="text-blue-400 hover:underline">Click here to log in!</Link>
+      <p className="my-2 text-white font-semibold text-center">
+        Already a user? <Link href="/login" className="inline-block text-blue-400 hover:underline">Click here to log in!</Link>
       </p>
     </form>
   )

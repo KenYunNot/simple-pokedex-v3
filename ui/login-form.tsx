@@ -26,7 +26,7 @@ export default function LoginForm() {
   }
 
   return (
-    <form action={onSubmit} className='flex flex-col items-center w-96 p-4 bg-gray-500 rounded-md'>
+    <form action={onSubmit} className='flex flex-col items-center w-50 p-4 bg-gray-500 rounded-md'>
       {error && (
         <div className="mb-3 px-5 py-3 bg-red-400 text-center text-white font-bold rounded-md">
           {error}
