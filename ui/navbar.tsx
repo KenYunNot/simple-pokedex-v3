@@ -3,19 +3,33 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HomeIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
+import { useState } from "react";
 
 import { signOut } from "next-auth/react";
+
+import { HomeIcon, PokeballIcon, TypeIcon } from "./icons";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 const links = [
   {
     name: "Home",
     href: "/",
-    icon: <HomeIcon className="w-11 h-11 text-white" />,
+    icon: <HomeIcon />,
+    smallIcon: <HomeIcon small={true} />,
   },
-  { name: "Pokédex", href: "/pokedex", icon: <PokeballIcon /> },
-  { name: "Types", href: "/types", icon: <TypeIcon /> },
+  {
+    name: "Pokédex",
+    href: "/pokedex",
+    icon: <PokeballIcon />,
+    smallIcon: <PokeballIcon small={true} />,
+  },
+  {
+    name: "Types",
+    href: "/types",
+    icon: <TypeIcon />,
+    smallIcon: <TypeIcon small={true} />,
+  },
 ];
 
 export default function Navbar() {
@@ -29,72 +43,126 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex justify-around items-center bg-red-500">
-      <Link href="/">
-        <Image
-          className="px-3 w-96"
-          src="/logo.png"
-          width={1023}
-          height={200}
-          alt="Simple Pokedex v3 logo"
-        />
-      </Link>
-      <div className="flex items-center ">
+    <>
+      <CollapsedNavbar pathname={pathname} className="md:hidden" />
+      <FullNavbar pathname={pathname} className="hidden md:flex" />
+    </>
+  );
+}
+
+
+/* A dropdown navbar for mobile resolutions */
+function CollapsedNavbar({
+  className = "",
+  pathname,
+}: {
+  className?: string;
+  pathname: string;
+}) {
+  const [showNav, setShowNav] = useState(false);
+
+  return (
+    <nav
+      className={`flex justify-between items-center h-14 px-2 bg-red-500 ${className}`}
+    >
+      <button onClick={() => setShowNav(!showNav)}>
+        <Bars3Icon className="w-7 h-7 text-white" />
+      </button>
+      <SignOutButton />
+      <ul
+        className={clsx("absolute top-14 left-0 w-full", {
+          hidden: !showNav,
+          block: showNav,
+        })}
+      >
         {links.map((link) => {
+          let isActive: boolean;
+          if (link.href === "/") {
+            isActive = pathname === link.href;
+          } else {
+            isActive = pathname.startsWith(link.href);
+          }
           return (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={clsx(
-                "w-24 h-20 mx-1 flex flex-col justify-center items-center text-white rounded-md",
-                {
-                  "bg-yellow-400":
-                    link.href !== "/" && pathname.startsWith(link.href),
-                  "hover:bg-red-400":
-                    link.href !== "/" && !pathname.startsWith(link.href),
-                },
-                {
-                  "bg-yellow-400": link.href === "/" && pathname === "/",
-                  "hover:bg-red-400": link.href === "/" && pathname !== "/",
-                }
-              )}
-            >
-              {link.icon}
-              <p className="font-semibold">{link.name}</p>
-            </Link>
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className={clsx(
+                  "flex justify-center items-center bg-red-500 py-3 text-xl text-white font-semibold",
+                  {
+                    "bg-yellow-400 pointer-events-none": isActive,
+                    "hover:bg-red-400": !isActive,
+                  }
+                )}
+                onClick={() => setShowNav(false)}
+              >
+                {link.name}
+              </Link>
+            </li>
           );
         })}
-        <button
-          className="mx-3 px-5 py-3 bg-yellow-500 text-white font-bold rounded-full hover:bg-yellow-600"
-          onClick={() => signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+      </ul>
     </nav>
   );
 }
 
-function PokeballIcon() {
+
+/* A full navbar for tablet and desktop resolutions */
+function FullNavbar({
+  className = "",
+  pathname,
+}: {
+  className?: string;
+  pathname: string;
+}) {
   return (
-    <Image
-      className=""
-      src="/pokeball.svg"
-      width={40}
-      height={40}
-      alt="Link to Pokemon list"
-    />
+    <nav className={`flex justify-between w-full px-3 bg-red-500 ${className}`}>
+      <Link href="/">
+        <Image
+          src="/logo.png"
+          width={300}
+          height={167}
+          alt="Simple Pokedex v3 logo"
+        />
+      </Link>
+      <ul className="flex justify-center items-center">
+        {links.map((link) => {
+          let isActive: boolean;
+          if (link.href === "/") {
+            isActive = pathname === link.href;
+          } else {
+            isActive = pathname.startsWith(link.href);
+          }
+          return (
+            <li className="h-full">
+              <Link
+                href={link.href}
+                className={clsx(
+                  "flex flex-col justify-center items-center h-full bg-red-500 rounded-md px-3 py-1 text-lg text-white font-semibold",
+                  {
+                    "bg-yellow-400 pointer-events-none": isActive,
+                    "hover:bg-red-400": !isActive,
+                  }
+                )}
+              >
+                {link.icon}
+                {link.name}
+              </Link>
+            </li>
+          );
+        })}
+        <SignOutButton />
+      </ul>
+    </nav>
   );
 }
 
-function TypeIcon() {
+function SignOutButton() {
   return (
-    <Image
-      className=""
-      src="/electric.svg"
-      width={40}
-      height={40}
-      alt="Link to type pages"
-    />
-  );
+    <button
+      className="w-24 h-10 px-2 py-1 bg-yellow-400 rounded-full text-white font-semibold"
+      onClick={() => signOut()}
+    >
+      Sign Out
+    </button>
+  )
 }
