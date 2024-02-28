@@ -43,7 +43,6 @@ export default function Pagination({ totalPages } : { totalPages: number}) {
         if (index === 0) position = 'first';
         if (index === pagination.length-1) position = 'last';
         if (pagination.length === 1) position = 'single';
-        if (page === '...') position = 'ellipsis';
 
         return (
           <PaginationNumber
