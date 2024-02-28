@@ -36,7 +36,7 @@ export default async function Home() {
         </p>
       </div>
       <h2 className="text-2xl font-bold pb-5">Featured Pokemon</h2>
-      {/* <Slider pokemonList={randomPokemon} /> */}
+      <Slider pokemonList={randomPokemon} />
     </div>
   );
 }
