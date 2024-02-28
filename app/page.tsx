@@ -1,13 +1,15 @@
-import { fetchRandomPokemon } from "@/lib/data";
-import Slider from "@/ui/slider";
+import { fetchRandomPokemon } from "@/lib/data/pokemon";
 import Link from "next/link";
 
+import Slider from "@/ui/slider";
+
+
 export default async function Home() {
-  // const featuredPokemon = await fetchRandomPokemon();
+  const randomPokemon = await fetchRandomPokemon();
 
   return (
     <div className="py-3">
-      <h1 className="w-full text-4xl font-bold text-center pb-3">
+      <h1 className="w-full text-3xl font-bold text-center pb-3">
         Welcome to Simple Pokedex v3!
       </h1>
       <div className="bg-gray-200 p-4 rounded-lg text-lg mt-3 mb-8">
@@ -33,8 +35,10 @@ export default async function Home() {
           !
         </p>
       </div>
-      <h2 className="text-3xl font-bold pb-5">Featured Pokemon</h2>
-      {/* <Slider pokemonList={featuredPokemon} /> */}
+      <h2 className="text-2xl font-bold pb-5">Featured Pokemon</h2>
+      {/* <Slider pokemonList={randomPokemon} /> */}
     </div>
   );
 }
+
+export const revalidate = 86400;
