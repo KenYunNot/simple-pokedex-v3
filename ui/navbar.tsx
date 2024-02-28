@@ -133,7 +133,7 @@ function FullNavbar({
             isActive = pathname.startsWith(link.href);
           }
           return (
-            <li className="h-full">
+            <li key={link.href} className="h-full">
               <Link
                 href={link.href}
                 className={clsx(
