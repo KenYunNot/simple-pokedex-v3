@@ -8,7 +8,6 @@ export async function fetchPokemon(
   query: string,
   page: number,
 ) {
-  console.log("Fetched the pokemon");
   const offset = ITEMS_PER_PAGE * (page - 1);
   try {
     let pokemon = await prisma.pokemon.findMany({
