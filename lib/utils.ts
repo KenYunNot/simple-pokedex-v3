@@ -33,20 +33,23 @@ export function capitalize(s: string, delimiter='-') {
 
 /* Returns the array of elements to display as the current pagination sequence */
 export function generatePagination(currentPage: number, totalPages: number) {
-  // If the total pages is less than or equal to 7, display all page numbers.
-  if (totalPages <= 7) 
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  // If the total number of pages is less than or equal to 5, display all the page numbers
+  if (totalPages <= 5) {
+    return Array.from({ length: totalPages }, (_, i) => i);
+  }
 
-  // If current page is within the first three pages, display the first three pages, an ellipsis, and the last two pages.
-  if (currentPage <= 3)
-    return [1, 2, 3, '...', totalPages-1, totalPages];
+  // If the current page is less than or equal to 3, display the first 5 pages
+  if (currentPage <= 3) {
+    return [1, 2, 3, 4, 5];
+  }
 
-  // If current page is within the last three pages, display the first two pages, an ellipsis, and the last three pages.
-  if (currentPage > totalPages-3)
-    return [1, 2, "...", totalPages-2, totalPages-1, totalPages];
+  // If the current page is greater than or equal to totalPages-3, display the last 5 pages
+  if (currentPage >= totalPages-3) {
+    return Array.from({ length: 5 }, (_, i) => (i+1) + totalPages-5) // Adding i+1 because pages start from 1, not 0
+  }
 
-  // Else, the current page must be in the middle of the total pages. Display the first page, an ellipsis, the current and adjacent pages, another ellipsis, and the last page.
-  return [1, "...", currentPage-1, currentPage, currentPage+1, "...", totalPages];
+  // Else, return the page and its two adjacent pages on both sides
+  return [ currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2 ];
 }
 
 /* Takes height in decimeters and weight in hectograms and converts to [m, ft, kg, lbs] respectively*/
