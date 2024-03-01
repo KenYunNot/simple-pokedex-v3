@@ -32,6 +32,8 @@ export default auth((req) => {
   if (!isLoggedIn) {
     return Response.redirect(new URL("/login", nextUrl));
   }
+
+  return null;
 })
 
 // Optionally, don't invoke Middleware on some paths
