@@ -10,6 +10,7 @@ import { signOut } from "next-auth/react";
 import { HomeIcon, PokeballIcon, TypeIcon } from "./icons";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/16/solid";
 
 const links = [
   {
@@ -71,6 +72,7 @@ function CollapsedNavbar({
           width={200}
           height={70}
           alt="Simple Pokedex v3 logo"
+          priority={true}
         />
       </Link>
       <button onClick={() => setShowNav(!showNav)}>
@@ -130,6 +132,7 @@ function FullNavbar({
           width={300}
           height={167}
           alt="Simple Pokedex v3 logo"
+          priority={true}
         />
       </Link>
       <ul className="flex justify-center items-center">
