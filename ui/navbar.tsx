@@ -115,7 +115,7 @@ function FullNavbar({
   pathname: string;
 }) {
   return (
-    <nav className={`flex justify-between w-full px-3 bg-red-500 ${className}`}>
+    <nav className={`flex justify-evenly w-full px-3 bg-red-500 ${className}`}>
       <Link href="/">
         <Image
           src="/logo.png"
