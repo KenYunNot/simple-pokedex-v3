@@ -68,7 +68,7 @@ function CollapsedNavbar({
       <button onClick={() => setShowNav(!showNav)}>
         <Bars3Icon className="w-7 h-7 text-white" />
       </button>
-      <SignOutButton />
+      {/* <SignOutButton /> */}
       <ul
         className={clsx("absolute top-14 left-0 w-full", {
           hidden: !showNav,
@@ -150,19 +150,19 @@ function FullNavbar({
             </li>
           );
         })}
-        <SignOutButton />
+        {/* <SignOutButton /> */}
       </ul>
     </nav>
   );
 }
 
-function SignOutButton() {
-  return (
-    <button
-      className="w-24 h-10 px-2 py-1 bg-yellow-400 rounded-full text-white font-semibold"
-      onClick={() => signOut()}
-    >
-      Sign Out
-    </button>
-  )
-}
+// function SignOutButton() {
+//   return (
+//     <button
+//       className="w-24 h-10 px-2 py-1 bg-yellow-400 rounded-full text-white font-semibold"
+//       onClick={() => signOut()}
+//     >
+//       Sign Out
+//     </button>
+//   )
+// }
