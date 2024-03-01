@@ -65,6 +65,14 @@ function CollapsedNavbar({
     <nav
       className={`flex justify-between items-center h-14 px-2 bg-red-500 ${className}`}
     >
+      <Link href="/">
+        <Image
+          src="/logo.png"
+          width={200}
+          height={70}
+          alt="Simple Pokedex v3 logo"
+        />
+      </Link>
       <button onClick={() => setShowNav(!showNav)}>
         <Bars3Icon className="w-7 h-7 text-white" />
       </button>
