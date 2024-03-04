@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Fragment } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 
 import TypeIcon from "@/lib/ui/type-icon";
@@ -14,16 +14,16 @@ export default async function TypeList() {
     <div className="grid grid-cols-3 gap-1 place-items-center p-3">
       {types.map((type) => {
         return (
-          <Fragment key={type.name}>
-            <RoundTypeIcon name={type.name} link={true} />
-          </Fragment>
+          <Link key={type.name} href={`/types/${type.name}`}>
+            <RoundTypeIcon name={type.name} />
+          </Link>
         )
       })}
     </div>
   )
 }
 
-function RoundTypeIcon({ name, link } : { name: string, link: boolean }) {
+function RoundTypeIcon({ name } : { name: string }) {
   const iconStyle = clsx(
     "p-4 rounded-full duration-150 opacity-50 hover:opacity-100", 
     {
