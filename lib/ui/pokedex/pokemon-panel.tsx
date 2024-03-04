@@ -1,5 +1,5 @@
 import type { Type } from "@prisma/client";
-import type { PokemonFull } from "@/lib/definitions";
+import type { Pokemon } from "@/lib/types/pokemon";
 
 import Image from "next/image";
 import clsx from "clsx";
@@ -13,39 +13,29 @@ import { capitalize, convertUnits, generateTypeDefenses } from "@/lib/utils";
 import { fetchTypes } from "@/lib/data/types";
 
 
-export default function PokemonPanels({
-  pokemonList,
+export default function PokemonPanel({
+  pokemon,
 }: {
-  pokemonList: PokemonFull[];
+  pokemon: Pokemon;
 }) {
   return (
     <div>
-      {pokemonList.map((pokemon, index) => {
-        return (
-          <div
-            id={`panel-${index}`}
-            className={index !== 0 ? "hidden" : ""}
-            key={pokemon.id}
-          >
-            <Image
-              src={pokemon.image_url}
-              width={475}
-              height={475}
-              alt={`Image of ${pokemon.name}`}
-            />
-            <PokedexData pokemon={pokemon} />
-            <TrainingData pokemon={pokemon} />
-            <BreedingData pokemon={pokemon} />
-            <TypeDefenses pokemon={pokemon} />
-          </div>
-        );
-      })}
+      <Image
+        src={pokemon.image_url}
+        width={475}
+        height={475}
+        alt={`Image of ${pokemon.name}`}
+      />
+      <PokedexData pokemon={pokemon} />
+      <TrainingData pokemon={pokemon} />
+      <BreedingData pokemon={pokemon} />
+      <TypeDefenses pokemon={pokemon} />
     </div>
   );
 }
 
 
-function PokedexData({ pokemon } : { pokemon : PokemonFull }) {
+function PokedexData({ pokemon } : { pokemon : Pokemon }) {
   const [meters, feet, kilograms, pounds] = convertUnits(
     pokemon.height,
     pokemon.weight
@@ -58,7 +48,7 @@ function PokedexData({ pokemon } : { pokemon : PokemonFull }) {
         <tbody>
           <tr>
             <th>National No.</th>
-            <td>{String(pokemon.id > 10000 ? pokemon.species.id : pokemon.id).padStart(4, "0")}</td>
+            <td>{String(pokemon.id).padStart(4, "0")}</td>
           </tr>
           <tr>
             <th>Type</th>
@@ -76,7 +66,7 @@ function PokedexData({ pokemon } : { pokemon : PokemonFull }) {
           </tr>
           <tr>
             <th>Genus</th>
-            <td>{pokemon.species.genus}</td>
+            <td>{pokemon.genus}</td>
           </tr>
           <tr>
             <th>Height</th>
@@ -113,7 +103,7 @@ function PokedexData({ pokemon } : { pokemon : PokemonFull }) {
 }
 
 
-function TrainingData({ pokemon }: { pokemon: PokemonFull }) {
+function TrainingData({ pokemon }: { pokemon: Pokemon }) {
   return (
     <Section>
       <SectionHeader>Training Data</SectionHeader>
@@ -121,15 +111,15 @@ function TrainingData({ pokemon }: { pokemon: PokemonFull }) {
         <tbody>
           <tr>
             <th>Catch rate</th>
-            <td>{pokemon.species.capture_rate}</td>
+            <td>{pokemon.capture_rate}</td>
           </tr>
           <tr>
             <th>Base friendship</th>
-            <td>{pokemon.species.base_happiness}</td>
+            <td>{pokemon.base_happiness}</td>
           </tr>
           <tr>
             <th>Growth rate</th>
-            <td>{capitalize(pokemon.species.growth_rate)}</td>
+            <td>{capitalize(pokemon.growth_rate)}</td>
           </tr>
         </tbody>
       </table>
@@ -138,7 +128,7 @@ function TrainingData({ pokemon }: { pokemon: PokemonFull }) {
 }
 
 
-function BreedingData({ pokemon } : { pokemon : PokemonFull }) {
+function BreedingData({ pokemon } : { pokemon : Pokemon }) {
   return (
     <Section>
       <SectionHeader>Breeding Data</SectionHeader>
@@ -147,7 +137,7 @@ function BreedingData({ pokemon } : { pokemon : PokemonFull }) {
           <tr>
             <th>Egg Groups</th>
             <td>
-              {pokemon.species.egg_groups.map((group, index) => {
+              {pokemon.egg_groups.map((group, index) => {
                 if (index === 0) {
                   return group;
                 }
@@ -157,11 +147,11 @@ function BreedingData({ pokemon } : { pokemon : PokemonFull }) {
           </tr>
           <tr>
             <th>Gender</th>
-            <td><span id="male">{(1000 - (pokemon.species.gender_rate * 125)) / 10}% male</span>, <span id="female">{pokemon.species.gender_rate * 125 / 10}% female</span></td>
+            <td><span id="male">{(1000 - (pokemon.gender_rate * 125)) / 10}% male</span>, <span id="female">{pokemon.gender_rate * 125 / 10}% female</span></td>
           </tr>
           <tr>
             <th>Egg Cycles</th>
-            <td>{pokemon.species.egg_cycles} <span className="text-gray-500 text-xs">(about ~{pokemon.species.egg_cycles * 255} steps)</span></td>
+            <td>{pokemon.egg_cycles} <span className="text-gray-500 text-xs">(about ~{pokemon.egg_cycles * 255} steps)</span></td>
           </tr>
         </tbody>
       </table>
@@ -170,7 +160,7 @@ function BreedingData({ pokemon } : { pokemon : PokemonFull }) {
 }
 
 
-async function TypeDefenses({ pokemon }: { pokemon: PokemonFull }) {
+async function TypeDefenses({ pokemon }: { pokemon: Pokemon }) {
   const types = await fetchTypes();
   const type_defenses = generateTypeDefenses(pokemon.types, types);
 
@@ -179,7 +169,7 @@ async function TypeDefenses({ pokemon }: { pokemon: PokemonFull }) {
       <SectionHeader>Type Defenses</SectionHeader>
       <p>
         The effectiveness of each type on
-        <span className="italic">{" " + pokemon.species.full_name}</span>
+        <span className="italic">{" " + pokemon.full_name}</span>
       </p>
       <div className="flex justify-center flex-wrap">
         <TypeTable types={types} type_defenses={type_defenses} start={0} end={types.length/2} />

@@ -81,12 +81,7 @@ function CollapsedNavbar({
         })}
       >
         {links.map((link) => {
-          let isActive: boolean;
-          if (link.href === "/") {
-            isActive = pathname === link.href;
-          } else {
-            isActive = pathname.startsWith(link.href);
-          }
+          const isActive = pathname === link.href;
           return (
             <li key={link.name}>
               <Link

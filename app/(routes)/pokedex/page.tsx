@@ -30,7 +30,7 @@ export default async function PokemonList({
       ">
         {pokemon.map((p) => {
           return (
-            <Link href={`/pokedex/${p.id}`} key={p.id}>
+            <Link href={`/pokedex/${p.name}`} key={p.id}>
               <PokemonCard pokemon={p} />
             </Link>
           );

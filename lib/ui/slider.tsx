@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import { PokemonDetailed } from "@/lib/definitions";
-import TypeIcon from "@/ui/type/type-icon";
+import { CardData } from "@/lib/types/pokemon";
+import TypeIcon from "@/lib/ui/type-icon";
 import { 
   ChevronLeftIcon, 
   ChevronRightIcon,
@@ -14,7 +14,7 @@ import clsx from "clsx";
 export default function Slider({
   pokemonList,
 }: {
-  pokemonList: PokemonDetailed[];
+  pokemonList: CardData[];
 }) {
   const [highlighted, setHighlighted] = useState<number>(0);  // The index of the currently highlighted Pokemon
 
@@ -82,7 +82,7 @@ function CarouselItem({
   highlighted,
   clone,
 }: {
-  pokemon: PokemonDetailed;
+  pokemon: CardData;
   highlighted: boolean;
   clone?: boolean,
 }) {
@@ -105,17 +105,16 @@ function CarouselItem({
             src={pokemon.image_url}
             width={475}
             height={475}
-            alt={`Image of ${pokemon.form_name}`}
+            alt={`Image of ${pokemon.full_name}`}
           />
         </div>
         <div
-          className={clsx("px-4 py-6 bg-gray-700", {
-            "h-44 rounded-bl-md": highlighted,
-            "h-32" : !highlighted,
+          className={clsx("h-32 px-4 py-6 bg-gray-700", {
+            "rounded-bl-md": highlighted,
           })}
         >
           <p className="text-2xl text-white font-semibold">
-            {pokemon.species.full_name}
+            {pokemon.full_name}
           </p>
           {highlighted && (
             <dl className="mt-3">
@@ -129,9 +128,6 @@ function CarouselItem({
                   );
                 })}
               </dd>
-
-              <dt className="w-24 mb-3 float-left text-lg text-white font-semibold">Genus</dt>
-              <dd className="mb-3 text-lg text-white">{pokemon.species.genus}</dd>
             </dl>
           )}
         </div>

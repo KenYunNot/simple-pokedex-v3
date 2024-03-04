@@ -1,7 +1,7 @@
 import { fetchRandomPokemon } from "@/lib/data/pokemon";
 import Link from "next/link";
 
-import Slider from "@/ui/slider";
+import Slider from "@/lib/ui/slider";
 
 
 export default async function Home() {

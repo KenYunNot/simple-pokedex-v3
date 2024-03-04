@@ -48,7 +48,7 @@ model PokemonSpecies {
   growth_rate     String
   flavor_texts    String[]
   gender_rate     Int
-  genus           String?
+  genus           String
   is_legendary    Boolean
   is_mythical     Boolean
   pokemon         Pokemon[]
