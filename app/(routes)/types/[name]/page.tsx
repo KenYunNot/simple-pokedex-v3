@@ -7,7 +7,7 @@ import PageHeader from "@/lib/ui/page-header";
 import SectionHeader from "@/lib/ui/section/header";
 import DualTypeTable from "@/lib/ui/pokemon-types/dual-type-table";
 import TypeIcon from "@/lib/ui/type-icon";
-import { CheckCircleIcon } from "@heroicons/react/16/solid";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/16/solid";
 
 import { fetchTypeByName } from "@/lib/data/types";
 import { capitalize } from "@/lib/utils";
@@ -54,43 +54,61 @@ function AttackDefense({ type } : { type: TypeWithRelations}) {
     <div className="flex flex-col">
       <SectionHeader>Attack <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
       {type.double_damage_to.length > 0 && (
-        <div>
-          <CheckCircleIcon className="w-5 h-5 bg-green-500 text-white rounded-full" />
-          <p><span className="italic">{capitalize(type.name)}</span> moves are super-effective against:</p>
+        <section>
+          <p>
+            <CheckCircleIcon className="inline w-5 h-5 mr-2 bg-green-500 text-white rounded-full" />
+            <span className="italic">{capitalize(type.name)}</span> moves are super-effective against:
+          </p>
           {buildTypeIconsList(type.double_damage_to)}
-        </div>
+        </section>
       )}
       {type.half_damage_to.length > 0 && (
-        <div>
-          <p><span className="italic">{capitalize(type.name)}</span> moves are not very effective against:</p>
+        <section>
+          <p>
+            <XCircleIcon className="inline w-5 h-5 mr-2 bg-red-500 text-white rounded-full" />
+            <span className="italic">{capitalize(type.name)}</span> moves are not very effective against:
+          </p>
           {buildTypeIconsList(type.half_damage_to)}
-        </div>
+        </section>
       )}
       {type.no_damage_to.length > 0 && (
-        <div>
-          <p><span className="italic">{capitalize(type.name)}</span> moves have no effect on:</p>
+        <section>
+          <p>
+            <XCircleIcon className="inline w-5 h-5 mr-2 bg-red-500 text-white rounded-full" />
+            <span className="italic">{capitalize(type.name)}</span> moves have no effect on:
+          </p>
           {buildTypeIconsList(type.no_damage_to)}
-        </div>
+        </section>
       )}
       
       <SectionHeader>Defense <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
       {type.no_damage_from.length > 0 && (
-        <div>
-          <p>These types have no effect against <span className="italic">{capitalize(type.name)}</span> Pokémon:</p>
+        <section>
+          <p>
+            <CheckCircleIcon className="inline w-5 h-5 mr-2 bg-green-500 text-white rounded-full" />
+            These types have no effect against <span className="italic">{capitalize(type.name)}</span> Pokémon:
+          </p>
           {buildTypeIconsList(type.no_damage_from)}
-        </div>
+        </section>
       )}
       {type.half_damage_from.length > 0 && (
-        <div>
-          <p>These types are not very effective against <span className="italic">{capitalize(type.name)}</span> Pokémon:</p>
+        <section>
+          
+          <p>
+            <CheckCircleIcon className="inline w-5 h-5 mr-2 bg-green-500 text-white rounded-full" />
+            These types are not very effective against <span className="italic">{capitalize(type.name)}</span> Pokémon:
+          </p>
           {buildTypeIconsList(type.half_damage_from)}
-        </div>
+        </section>
       )}
       {type.double_damage_from.length > 0 && (
-        <div>
-          <p>These types are super effective against <span className="italic">{capitalize(type.name)}</span> Pokémon:</p>
+        <section>
+          <p>
+            <XCircleIcon className="inline w-5 h-5 mr-2 bg-red-500 text-white rounded-full" />
+            These types are super effective against <span className="italic">{capitalize(type.name)}</span> Pokémon:
+          </p>
           {buildTypeIconsList(type.double_damage_from)}
-        </div>
+        </section>
       )}
     </div>
   )
