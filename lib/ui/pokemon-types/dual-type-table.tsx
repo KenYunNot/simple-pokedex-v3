@@ -1,13 +1,17 @@
-import { Type } from "@prisma/client";
+import type { Type } from "@prisma/client";
+import type { TypeWithRelations } from "@/lib/types/pokemon-types"
+
 import { Fragment } from "react";
-import { fetchTypes } from "@/lib/data/types";
-import { TypeFull } from "@/lib/definitions";
-import { generateDTAChart } from "@/lib/utils";
+
 import SectionHeader from "@/lib/ui/section/header";
 import TypeDamage from "@/lib/ui/pokemon-types/type-damage";
 import TypeIcon from "@/lib/ui/type-icon";
 
-export default async function DualTypeTable({ type } : { type: TypeFull}) {
+import { fetchTypes } from "@/lib/data/types";
+import { generateDTAChart } from "@/lib/utils";
+
+
+export default async function DualTypeTable({ type } : { type: TypeWithRelations}) {
   const types = await fetchTypes();
   const dtaChart = generateDTAChart(type, types);
 

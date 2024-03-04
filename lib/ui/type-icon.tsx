@@ -1,12 +1,12 @@
 import type { Type } from "@prisma/client";
-import type { TypeFull } from "@/lib/definitions";
+import type { TypeWithRelations } from "../types/pokemon-types";
 
 import Link from "next/link"
 
 import clsx from "clsx";
 
 
-export default function TypeIcon({ type, shortened, link, className } : { type: TypeFull | Type, shortened?: boolean, link?: boolean, className?: string }) {
+export default function TypeIcon({ type, shortened, link, className } : { type: TypeWithRelations | Type, shortened?: boolean, link?: boolean, className?: string }) {
   const iconStyle = clsx(
     "flex justify-center items-center text-white text-xs border border-gray-400 rounded text-shadow",
     {

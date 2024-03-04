@@ -1,5 +1,5 @@
 import type { Type } from "@prisma/client";
-import type { TypeFull } from "@/lib/definitions";
+import type { TypeWithRelations } from "@/lib/types/pokemon-types";
 
 import { notFound } from "next/navigation";
 
@@ -34,7 +34,7 @@ export default async function Type({ params } : { params: { name: string }}) {
 }
 
 
-function AttackDefense({ type } : { type: TypeFull}) {
+function AttackDefense({ type } : { type: TypeWithRelations}) {
   
   function buildTypeIconsList(damage_relation: Type[]) {
     return (
