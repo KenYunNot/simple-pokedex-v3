@@ -11,7 +11,7 @@ export default async function TypeList() {
   const types = await fetchTypes(); 
 
   return (
-    <div className="grid grid-cols-3 gap-1 place-items-center p-3">
+    <div className="grid grid-cols-3 gap-10 place-items-center p-3">
       {types.map((type) => {
         return (
           <Link key={type.name} href={`/types/${type.name}`}>
