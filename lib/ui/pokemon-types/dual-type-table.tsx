@@ -18,7 +18,7 @@ export default async function DualTypeTable({ type } : { type: TypeWithRelations
   return (
     <div>
       <SectionHeader>Dual-type attack <span className="text-gray-600 italic">pros & cons</span></SectionHeader>
-      <div className="w-fit">
+      <div className="overflow-auto">
         <table className="m-3 border border-collapse">
           <tbody>
             <tr className="flex">
