@@ -5,17 +5,20 @@ import clsx from "clsx";
 import TypeIcon from "@/lib/ui/type-icon";
 
 import { fetchTypes } from "@/lib/data/types";
+import { capitalize } from "@/lib/utils";
 
 
 export default async function TypeList() {
   const types = await fetchTypes(); 
 
   return (
-    <div className="grid grid-cols-3 gap-10 place-items-center p-3">
+    <div className="grid grid-cols-1 gap-10 place-items-center \
+      md:grid-cols-2
+      xl:grid-cols-3">
       {types.map((type) => {
         return (
           <Link key={type.name} href={`/types/${type.name}`}>
-            <RoundTypeIcon name={type.name} />
+            <SVGTypeIcon name={type.name} />
           </Link>
         )
       })}
@@ -23,9 +26,10 @@ export default async function TypeList() {
   )
 }
 
-function RoundTypeIcon({ name } : { name: string }) {
+function SVGTypeIcon({ name } : { name: string }) {
   const iconStyle = clsx(
-    "p-4 rounded-full duration-150 opacity-50 hover:opacity-100", 
+    "flex flex-col justify-center items-center w-72 h-72 rounded-2xl duration-150 opacity-50 hover:opacity-100 \
+      md:w-80 md:h-80", 
     {
       "bg-bug" : name === 'bug',
       "bg-dark" : name === 'dark',
@@ -49,12 +53,14 @@ function RoundTypeIcon({ name } : { name: string }) {
   );
 
   return (
-    <Image 
-      src={`${name}.svg`}
-      width={100}
-      height={100}
-      className={iconStyle}
-      alt={`${name} type icon`}
-    />
+    <div className={iconStyle}>
+      <Image 
+        src={`${name}.svg`}
+        width={175}
+        height={175}
+        alt={`${name} type icon`}
+      />
+      <p className="pt-8 text-3xl text-white text-center font-semibold">{capitalize(name)}</p>
+    </div>
   )
 }
