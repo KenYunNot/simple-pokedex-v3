@@ -1,45 +1,46 @@
 import { CardData, Pokemon } from "@/lib/types/pokemon";
 
 import prisma from "@/lib/prisma";
+import { unstable_cache } from "next/cache";
 
 
 const ITEMS_PER_PAGE = 16;
 /* Given a query string and a page number, fetch a 16 count Pokemon page */
-export async function fetchPokemon(
-  query: string,
-  page: number,
-): Promise<CardData[]> {
-  const offset = ITEMS_PER_PAGE * (page - 1);
-  try {
-    const data = await prisma.pokemon.findMany({
-      where: {
-        name: {
-          contains: query,
+export const fetchPokemon = unstable_cache(
+  async ( query: string, page: number ): Promise<CardData[]> => {
+    const offset = ITEMS_PER_PAGE * (page - 1);
+    try {
+      const data = await prisma.pokemon.findMany({
+        where: {
+          name: {
+            contains: query,
+          },
+          is_default: true,
         },
-        is_default: true,
-      },
-      include: {
-        species: true,
-        types: true,
-      },
-      skip: offset,
-      take: ITEMS_PER_PAGE,
-    });
-    const pokemon = data.map(p => {
-      return {
-        id: p.id,
-        name: p.name,
-        full_name: p.species.full_name,
-        image_url: p.image_url,
-        types: p.types,
-      }
-    });
-    return pokemon;
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch Pokemon data");
-  }
-}
+        include: {
+          species: true,
+          types: true,
+        },
+        skip: offset,
+        take: ITEMS_PER_PAGE,
+      });
+      const pokemon = data.map(p => {
+        return {
+          id: p.id,
+          name: p.name,
+          full_name: p.species.full_name,
+          image_url: p.image_url,
+          types: p.types,
+        }
+      });
+      return pokemon;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch Pokemon data");
+    }
+  },
+  ['card-data']
+)
 
 /* Given an id number, fetch an individual Pokemon */
 export async function fetchPokemonById(id: number): Promise<Pokemon | null> {
@@ -171,46 +172,49 @@ export async function fetchPokemonByName(name: string): Promise<Pokemon | null> 
  * Fetch a number of random Pokemon
  * @returns 
  */
-export async function fetchRandomPokemon(count=10): Promise<CardData[]> {
-  try {
-    const numPokemon = await prisma.pokemon.count();
-    let randomIds = [];
-    for (let i = 0; i < count; i++) {
-      let randomId = Math.floor(Math.random() * numPokemon);
-      while (randomId in randomIds) {
-        randomId = Math.floor(Math.random() * numPokemon);
+export const fetchRandomPokemon = unstable_cache(
+  async ( count=10 ): Promise<CardData[]> => {
+    try {
+      const numPokemon = await prisma.pokemon.count();
+      let randomIds = [];
+      for (let i = 0; i < count; i++) {
+        let randomId = Math.floor(Math.random() * numPokemon);
+        while (randomId in randomIds) {
+          randomId = Math.floor(Math.random() * numPokemon);
+        }
+        randomIds.push(randomId);
       }
-      randomIds.push(randomId);
-    }
-
-    let data = await prisma.pokemon.findMany({
-      where: {
-        id: {
-          in: randomIds,
+  
+      let data = await prisma.pokemon.findMany({
+        where: {
+          id: {
+            in: randomIds,
+          },
+          is_default: true,
         },
-        is_default: true,
-      },
-      include: {
-        species: true,
-        types: true,
-      },
-    });
-
-    const pokemon = data.map(p => {
-      return {
-        id: p.id,
-        name: p.name,
-        full_name: p.species.full_name,
-        image_url: p.image_url,
-        types: p.types,
-      }
-    });
-    return pokemon;
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error(`Failed to fetch Pokemon`);
-  }
-}
+        include: {
+          species: true,
+          types: true,
+        },
+      });
+  
+      const pokemon = data.map(p => {
+        return {
+          id: p.id,
+          name: p.name,
+          full_name: p.species.full_name,
+          image_url: p.image_url,
+          types: p.types,
+        }
+      });
+      return pokemon;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error(`Failed to fetch Pokemon`);
+    }
+  },
+  ['featured-pokemon']
+)
 
 
 /* Counts the total number of pages (16 Pokemon per page) for a given query */
