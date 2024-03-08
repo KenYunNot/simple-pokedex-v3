@@ -31,13 +31,6 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
 
-  // If the page is login or signup, don't display the navbar
-  //      Figure out better way to implement this
-  //      It shouldn't be a component's job to determine whether itself is rendered or not
-  if (pathname.endsWith("/login") || pathname.endsWith("/register")) {
-    return null;
-  }
-
   return (
     <>
       <CollapsedNavbar pathname={pathname} className="md:hidden" />
@@ -87,7 +80,7 @@ function CollapsedNavbar({
               <Link
                 href={link.href}
                 className={clsx(
-                  "flex justify-center items-center bg-red-500 py-3 text-xl text-white font-semibold",
+                  "flex justify-center items-center w-36 bg-red-500 py-3 text-xl text-white font-semibold",
                   {
                     "bg-yellow-400 pointer-events-none": isActive,
                     "hover:bg-red-400": !isActive,
@@ -138,7 +131,7 @@ function FullNavbar({
               <Link
                 href={link.href}
                 className={clsx(
-                  "flex flex-col justify-center items-center h-full bg-red-500 rounded-md px-3 py-1 text-lg text-white font-semibold",
+                  "flex flex-col justify-center items-center w-24 h-full bg-red-500 rounded-md px-3 py-1 text-lg text-white font-semibold",
                   {
                     "bg-yellow-400 pointer-events-none": isActive,
                     "hover:bg-red-400": !isActive,
