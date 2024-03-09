@@ -6,68 +6,16 @@ body {
   background-image: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, #e7e7e7 2px, #e7e7e7 11px);
 }
 
-.data-table {
-  width: 100%;
-  font-size: 15px;
-}
-
-.data-table tr {
+table tr {
   border-width: 1px 0px;
 }
 
-.data-table th {
+table th {
   width: 30%;
   text-align: right;
   padding: 8px 10px;
 }
 
-.slider-container {
-  position: relative;
-  height: 560px;
-  overflow-x: clip;
-}
-
-.slider {
-  display: flex;
-  width: 7000px;
-  border-top: 4px;
-  border-style: solid;
-  border-color: #1F2937;
-  transition: 200ms;
-}
-
-.slider-button {
-  position: absolute;
-  top: 25%;
-  width: 75px;
-  height: 75px;
-  color: white;
-  background-color: #6B7280;
-  opacity: 70%;
-  border-radius: 8px;
-  z-index: 5;
-}
-
-.slider-button:hover {
-  opacity: 100%;
-}
-
-.slider-button.right {
-  right: 5%;
-}
-
-.slider-button.left {
-  left: 5%
-}
-
 .text-shadow {
   text-shadow: 0px 1px 4px black;
-}
-
-#male {
-  color: blue;
-}
-
-#female {
-  color: rgb(243, 95, 236);
 }
