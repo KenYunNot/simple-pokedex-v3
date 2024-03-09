@@ -1,20 +1,24 @@
 import prisma from "@/lib/prisma";
+import { unstable_cache } from "next/cache";
 
 
 /* Fetch all Pokemon types (simple format) */
-export async function fetchTypes() {
-  try {
-    let types = await prisma.type.findMany({
-      orderBy: {
-        id: 'asc',
-      }
-    });
-    return types;
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch types");
-  }
-}
+export const fetchTypes = unstable_cache(
+  async () => {
+    try {
+      let types = await prisma.type.findMany({
+        orderBy: {
+          id: 'asc',
+        }
+      });
+      return types;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch types");
+    }
+  },
+  ['types']
+)
 
 /* Given an id number, fetch a type */
 export async function fetchTypeByName(name: string) {
