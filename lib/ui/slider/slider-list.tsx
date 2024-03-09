@@ -21,22 +21,22 @@ export default function SliderList({
 
   /* Changes the highlighted Pokemon to the left */
   function moveLeft() {
-    setHighlighted((highlighted + 9) % 10);
+    setHighlighted((highlighted + (pokemonList.length-1)) % pokemonList.length);
   }
 
   /* Changes the highlighted Pokemon to the right */
   function moveRight() {
-    setHighlighted((highlighted + 1) % 10);
+    setHighlighted((highlighted + 1) % pokemonList.length);
   }
 
   const translate = -1 * (highlighted * 256 + 896);  // Calculate the translation in pixels (account for the cloned Pokemon)
-  
+
   return (
-    <div className="slider-container">
-      <button className="slider-button left" onClick={moveLeft}><ChevronLeftIcon /></button>
-      <button className="slider-button right" onClick={moveRight}><ChevronRightIcon /></button>
+    <div className="relative h-[560px] overflow-x-clip">
+      <button className="absolute top-1/4 left-5 w-20 h-20 text-color-white bg-[#6B7280] opacity-70 rounded-lg z-10 hover:opacity-100" onClick={moveLeft}><ChevronLeftIcon /></button>
+      <button className="absolute top-1/4 right-5 w-20 h-20 text-color-white bg-[#6B7280] opacity-70 rounded-lg z-10 hover:opacity-100" onClick={moveRight}><ChevronRightIcon /></button>
       <ul
-        className="slider"
+        className="flex w-[7000px] border-t-4 border-[#1F2937] duration-200"
         style={{
           transform: `translate(${translate}px)`,
         }}
