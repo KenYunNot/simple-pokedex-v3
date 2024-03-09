@@ -20,12 +20,12 @@ export default function SliderItem({
   return (
     <Link className="h-fit" href={`/pokedex/${pokemon.name}`}>
       <li 
+        key={pokemon.id}
         className={clsx("border-r-4 border-gray-800 slider-item duration-200 hover:opacity-90", {
-          "w-64 h-96 border-b-4" : !highlighted,
-          "w-96 rounded-br-md" : highlighted,
+          "w-64 h-96 border-b-4 non-highlighted" : !highlighted,
+          "w-80 rounded-br-md highlighted" : highlighted,
           "clone" : clone,
         })} 
-        key={pokemon.id}
       >
         <div className="relative">
           <p className="absolute w-full h-64 pt-10 text-8xl text-gray-600 text-center font-semibold opacity-30">
@@ -41,7 +41,7 @@ export default function SliderItem({
         </div>
         <div
           className={clsx("h-32 px-4 py-6 bg-gray-700", {
-            "rounded-bl-md": highlighted,
+            "h-40 rounded-bl-md": highlighted,
           })}
         >
           <p className="text-2xl text-white font-semibold">
