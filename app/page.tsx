@@ -12,13 +12,13 @@ export default async function Home() {
           <p className="md:text-xl 2xl:text-4xl">The simplest solution for Pokemon data</p>
         </div>
       </section>
-      <section className="max-w-[1500px] mx-[auto] my-4 p-6 md:my-8 md:p-8 bg-white rounded-lg">
-        <div className="mb-20">
+      <section className="max-w-[1500px] mx-[auto] my-4 py-6 md:my-8 md:p-8 bg-white rounded-lg">
+        <div className="mb-20 px-4 md:p-0">
           <h2 className="text-2xl md:text-4xl font-bold pb-6">Quick Links</h2>
           <BentoGrid />
         </div>
         <div className="mb-20">
-          <h2 className="text-2xl md:text-4xl font-bold pb-6">Featured Pokemon</h2>
+          <h2 className="pl-4 text-2xl md:text-4xl font-bold pb-6">Featured Pokemon</h2>
           <PokemonSlider />
         </div>
       </section>  
