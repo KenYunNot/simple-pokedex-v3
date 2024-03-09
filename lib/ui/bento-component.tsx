@@ -13,7 +13,7 @@ export default function BentoComponent({
   /* row-span-1  row-span-2  row-span-3  row-span-4  row-span-5 */
 
   return (
-    <div className={`group/component flex flex-col justify-center items-center col-span-${colSpan} row-span-${rowSpan} rounded-md${className}`}>
+    <div className={`group/component flex flex-col justify-center items-center col-span-${colSpan} row-span-${rowSpan} ${className}`}>
       {!!children ? children : "Some filler text"}
     </div>
   );
