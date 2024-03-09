@@ -19,7 +19,7 @@ export default async function BentoGrid() {
   }
 
   return (
-    <div className="grid auto-rows-[300px] gap-3 max-w-[1500px] mx-[auto] px-5 py-7 bg-transparent 
+    <div className="grid auto-rows-[300px] gap-5 bg-transparent 
       grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
 
       <BentoComponent className="duration-200 hover:brightness-90 hover:cursor-pointer
@@ -100,7 +100,7 @@ export default async function BentoGrid() {
       <BentoComponent className="duration-200 hover:brightness-90 hover:cursor-pointer" >
         <Link href="https://github.com/KenYunNot" target="_blank" className="flex flex-col justify-center items-center h-full">
           <ImageSection>
-            <SocialIcon network="github" />
+            <SocialIcon network="github" as="div" />
           </ImageSection>
           <TextSection className="bg-gray-900">
             <h2 className="text-3xl text-white font-semibold">See my GitHub!</h2>
@@ -111,7 +111,7 @@ export default async function BentoGrid() {
       <BentoComponent className="duration-200 hover:brightness-90 hover:cursor-pointer" >
         <Link href="https://www.linkedin.com/in/ken-yun/" target="_blank" className="flex flex-col justify-center items-center h-full">
           <ImageSection>
-            <SocialIcon network="linkedin" />
+            <SocialIcon network="linkedin" as="div" />
           </ImageSection>
           <TextSection className="bg-sky-700">
             <h2 className="text-3xl text-white font-semibold">See my LinkedIn!</h2>
