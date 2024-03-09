@@ -21,9 +21,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <main className='bg-white rounded'>
-          {children}
-        </main>
+        {children}
       </body>
     </html>
     
