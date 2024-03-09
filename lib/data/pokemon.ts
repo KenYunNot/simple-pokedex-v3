@@ -42,67 +42,6 @@ export const fetchPokemon = unstable_cache(
   ['card-data']
 )
 
-/* Given an id number, fetch an individual Pokemon */
-export async function fetchPokemonById(id: number): Promise<Pokemon | null> {
-  try {
-    let pokemon = await prisma.pokemon.findFirst({
-      where: {
-        id,
-      },
-      include: {
-        species: true,
-        types: {
-          include: {
-            double_damage_from: true,
-            double_damage_to: true,
-            half_damage_from: true,
-            half_damage_to: true,
-            no_damage_from: true,
-            no_damage_to: true,
-          },
-          orderBy: {
-            id: "asc",
-          }
-        }
-      }
-    });
-    
-    if (!pokemon) return null;
-
-    const left = !!pokemon.species.left_name && !!pokemon.species.left_full_name ? 
-      { name: pokemon.species.left_name, full_name: pokemon.species.left_full_name } :
-      null;
-    const right = !!pokemon.species.right_name && !!pokemon.species.right_full_name ? 
-      { name: pokemon.species.right_name, full_name: pokemon.species.right_full_name } :
-      null;
-    return {
-      id: pokemon.id,
-      name: pokemon.name,
-      abilities: pokemon.abilities,
-      image_url: pokemon.image_url,
-      full_name: pokemon.species.full_name,
-      height: pokemon.height,
-      weight: pokemon.weight,
-      left,
-      right,
-      base_happiness: pokemon.species.base_happiness,
-      capture_rate: pokemon.species.capture_rate,
-      egg_cycles: pokemon.species.egg_cycles,
-      egg_groups: pokemon.species.egg_groups,
-      growth_rate: pokemon.species.growth_rate,
-      flavor_texts: pokemon.species.flavor_texts,
-      gender_rate: pokemon.species.gender_rate,
-      genus: pokemon.species.genus,
-      is_legendary: pokemon.species.is_legendary,
-      is_mythical: pokemon.species.is_mythical,
-      types: pokemon.types,
-    };
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error(`Failed to fetch Pokemon with ID ${id}`);
-  }
-}
-
 
 /* Given an id number, fetch an individual Pokemon */
 export async function fetchPokemonByName(name: string): Promise<Pokemon | null> {
