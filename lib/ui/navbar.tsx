@@ -40,7 +40,7 @@ function SlideInNavbar({ pathname }: { pathname: string }) {
 
   return (
     <div>
-      <nav className="fixed flex justify-between items-center w-full h-14 bg-transparent md:hidden">
+      <nav className="fixed flex justify-between items-center w-full h-14 bg-transparent z-50 md:hidden">
         <LogoLink small={true} />
         <button onClick={() => setShowNav(!showNav)}>
           <Bars3Icon className="w-7 h-7 mx-2 text-white" />
@@ -81,7 +81,7 @@ function SlideInNavbar({ pathname }: { pathname: string }) {
 /* A full navbar for tablet and desktop resolutions */
 function FullNavbar({ pathname }: { pathname: string }) {
   return (
-    <nav className="fixed hidden md:flex justify-start w-full bg-red-500">
+    <nav className="fixed hidden md:flex justify-start w-full bg-red-500 z-50">
       <LogoLink />
       <ul className="absolute flex justify-end items-center gap-3 w-full h-full px-3 lg:justify-center">
         {links.map((link) => {
