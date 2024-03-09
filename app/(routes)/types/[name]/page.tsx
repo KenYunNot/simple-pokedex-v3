@@ -23,13 +23,13 @@ export default async function Type({ params } : { params: { name: string }}) {
   }
 
   return (
-    <div>
+    <main className="max-w-7xl mx-[auto] bg-white mt-4 p-8 rounded-lg">
       <PageHeader>
         {capitalize(type.name)} <span className="text-gray-500">(type)</span>
       </PageHeader>
       <AttackDefense type={type} />
       <DualTypeTable type={type} />
-    </div>
+    </main>
   )
 }
 

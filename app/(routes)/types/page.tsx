@@ -12,7 +12,7 @@ export default async function TypeList() {
   const types = await fetchTypes(); 
 
   return (
-    <div className="grid grid-cols-1 gap-10 place-items-center \
+    <main className="grid grid-cols-1 gap-10 place-items-center max-w-7xl mx-[auto] bg-white mt-4 py-6 px-4 \
       md:grid-cols-2
       xl:grid-cols-3">
       {types.map((type) => {
@@ -22,13 +22,13 @@ export default async function TypeList() {
           </Link>
         )
       })}
-    </div>
+    </main>
   )
 }
 
 function SVGTypeIcon({ name } : { name: string }) {
   const iconStyle = clsx(
-    "flex flex-col justify-center items-center w-72 h-72 rounded-2xl duration-150 opacity-50 hover:opacity-100 \
+    "flex flex-col justify-center items-center w-64 h-64 rounded-full duration-150 opacity-70 hover:opacity-100 \
       md:w-80 md:h-80", 
     {
       "bg-bug" : name === 'bug',
@@ -56,8 +56,8 @@ function SVGTypeIcon({ name } : { name: string }) {
     <div className={iconStyle}>
       <Image 
         src={`${name}.svg`}
-        width={175}
-        height={175}
+        width={130}
+        height={130}
         alt={`${name} type icon`}
       />
       <p className="pt-8 text-3xl text-white text-center font-semibold">{capitalize(name)}</p>

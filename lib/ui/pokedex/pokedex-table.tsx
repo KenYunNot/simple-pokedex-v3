@@ -16,7 +16,7 @@ export default function PokedexTable({ pokemon } : { pokemon : Pokemon }) {
   return (
     <Section>
       <SectionHeader>Pokedex Data</SectionHeader>
-      <table className="w-full text-base">
+      <table className="data-table w-full text-base">
         <tbody>
           <tr>
             <th>National No.</th>

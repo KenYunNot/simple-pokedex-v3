@@ -10,7 +10,7 @@ export default function TrainingTable({ pokemon }: { pokemon: Pokemon }) {
   return (
     <Section>
       <SectionHeader>Training Data</SectionHeader>
-      <table className="w-full text-base">
+      <table className="data-table w-full text-base">
         <tbody>
           <tr>
             <th>Catch rate</th>
