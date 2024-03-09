@@ -32,11 +32,10 @@ export default function SliderList({
   const translate = -1 * (highlighted * 256 + 896);  // Calculate the translation in pixels (account for the cloned Pokemon)
 
   return (
-    <div className="relative h-[560px] overflow-x-clip">
+    <div className="relative h-[512px] overflow-x-clip">
       <button className="absolute top-1/4 left-5 w-20 h-20 text-color-white bg-[#6B7280] opacity-70 rounded-lg z-10 hover:opacity-100" onClick={moveLeft}><ChevronLeftIcon /></button>
-      <button className="absolute top-1/4 right-5 w-20 h-20 text-color-white bg-[#6B7280] opacity-70 rounded-lg z-10 hover:opacity-100" onClick={moveRight}><ChevronRightIcon /></button>
       <ul
-        className="flex w-[7000px] border-t-4 border-[#1F2937] duration-200"
+        className="flex w-[5120px] border-t-4 border-[#1F2937] duration-200"
         style={{
           transform: `translate(${translate}px)`,
         }}
@@ -74,6 +73,7 @@ export default function SliderList({
           );
         })}
       </ul>
+      <button className="absolute top-1/4 right-5 w-20 h-20 text-color-white bg-[#6B7280] opacity-70 rounded-lg z-10 hover:opacity-100" onClick={moveRight}><ChevronRightIcon /></button>
     </div>
   );
 }
