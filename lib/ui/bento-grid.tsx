@@ -89,9 +89,9 @@ export default async function BentoGrid() {
             />
           </ImageSection>
           <TextSection className="bg-rose-400">
-            <h2 className="pb-4 text-3xl text-white font-semibold">Why Simple Pokedex?</h2>
+            <h2 className="pb-4 text-3xl text-white font-semibold">How does it work?</h2>
             <p className="text-rose-900">
-              Find out more about your favorite Pokemon and explore what makes them powerful! Simple Pokedex is your one-stop destination for all things Pokemon!
+              I created this application using Next.js, TypeScript, Tailwind CSS, and Prisma ORM on top of a PostgreSQL database! Deployed live to Vercel!
             </p>
           </TextSection>
         </Link>

@@ -16,7 +16,7 @@ export default async function Home() {
       </section>
       <section className="max-w-[1500px] mx-[auto] my-4 py-6 md:my-8 md:p-8 bg-white rounded-lg">
         <div className="mb-20 px-4 md:p-0">
-          <h2 className="text-2xl md:text-4xl font-bold pb-6">Quick Links</h2>
+          <h2 className="text-2xl md:text-4xl font-bold pb-6">About the page</h2>
           <BentoGrid />
         </div>
         <div className="mb-20">
