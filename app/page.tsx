@@ -1,5 +1,7 @@
-import BentoGrid from "@/lib/ui/bento-grid";
-import PokemonSlider from "@/lib/ui/slider";
+import dynamic from "next/dynamic";
+
+const BentoGrid = dynamic(() => import("@/lib/ui/bento-grid"));
+const PokemonSlider = dynamic(() => import("@/lib/ui/slider"));
 
 
 export default async function Home() {
