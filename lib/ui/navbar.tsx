@@ -8,7 +8,6 @@ import { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 
-
 const links = [
   {
     name: "Home",
@@ -29,76 +28,62 @@ export default function Navbar() {
 
   return (
     <>
-      <CollapsedNavbar pathname={pathname} className="md:hidden" />
-      <FullNavbar pathname={pathname} className="hidden md:flex" />
+      <SlideInNavbar pathname={pathname} />
+      <FullNavbar pathname={pathname} />
     </>
   );
 }
 
-
 /* A dropdown navbar for mobile resolutions */
-function CollapsedNavbar({
-  className = "",
-  pathname,
-}: {
-  className?: string;
-  pathname: string;
-}) {
+function SlideInNavbar({ pathname }: { pathname: string }) {
   const [showNav, setShowNav] = useState(false);
 
   return (
-    <nav
-      className={`flex justify-between items-center h-14 px-2 bg-red-500 ${className}`}
-    >
-      <LogoLink />
-      <button onClick={() => setShowNav(!showNav)}>
-        <Bars3Icon className="w-7 h-7 text-white" />
-      </button>
-      {/* <SignOutButton /> */}
-      <ul
-        className={clsx("absolute top-14 left-0 w-full", {
-          hidden: !showNav,
-          block: showNav,
-        })}
-      >
-        {links.map((link) => {
-          const isActive = pathname === link.href;
-          return (
-            <li key={link.name}>
-              <Link
-                href={link.href}
-                className={clsx(
-                  "flex justify-center items-center w-36 bg-red-500 py-3 text-xl text-white font-semibold",
-                  {
-                    "bg-yellow-400 pointer-events-none": isActive,
-                    "hover:bg-red-400": !isActive,
-                  }
-                )}
-                onClick={() => setShowNav(false)}
-              >
-                {link.name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <div>
+      <nav className="fixed flex justify-between items-center w-full h-14 bg-transparent md:hidden">
+        <LogoLink small={true} />
+        <button onClick={() => setShowNav(!showNav)}>
+          <Bars3Icon className="w-7 h-7 mx-2 text-white" />
+        </button>
+        {/* <SignOutButton /> */}
+        <ul
+          className={clsx("absolute top-14 left-0 w-full", {
+            "hidden": !showNav,
+            "block": showNav,
+          })}
+        >
+          {links.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  className={clsx(
+                    "flex justify-center items-center w-36 bg-red-500 py-3 text-xl text-white font-semibold",
+                    {
+                      "bg-yellow-400 pointer-events-none": isActive,
+                      "hover:bg-red-400": !isActive,
+                    }
+                  )}
+                  onClick={() => setShowNav(false)}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
   );
 }
 
-
 /* A full navbar for tablet and desktop resolutions */
-function FullNavbar({
-  className = "",
-  pathname,
-}: {
-  className?: string;
-  pathname: string;
-}) {
+function FullNavbar({ pathname }: { pathname: string }) {
   return (
-    <nav className={`relative flex justify-start w-full px-3 bg-red-500 ${className}`}>
+    <nav className="fixed hidden md:flex justify-start w-full bg-red-500">
       <LogoLink />
-      <ul className="absolute flex justify-center items-center gap-3 w-full h-full">
+      <ul className="absolute flex justify-end items-center gap-3 w-full h-full px-3 lg:justify-center">
         {links.map((link) => {
           const isActive = pathname === link.href;
           return (
@@ -123,16 +108,16 @@ function FullNavbar({
   );
 }
 
-function LogoLink() {
+function LogoLink({ small } : { small?: boolean }) {
   return (
-    <Link href="/" className="px-4">
+    <Link href="/">
       <Image
         src="/logo.png"
-        width={300}
-        height={167}
+        width={small ? 220 : 300}
+        height={small ? 130 : 167}
         alt="Simple Pokedex v3 logo"
         priority={true}
       />
     </Link>
-  )
+  );
 }
