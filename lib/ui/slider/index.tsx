@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { useState, memo } from "react";
+import { memo } from "react";
 
 import SliderList from "@/lib/ui/slider/slider-list";
 
@@ -13,6 +12,5 @@ async function Slider() {
     <SliderList pokemonList={randomPokemon} />
   )
 }
-
 
 export default memo(Slider);
