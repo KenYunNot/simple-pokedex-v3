@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 
 import Navbar from "@/lib/ui/navbar";
 import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Raleway({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Simple Pokedex v3',
