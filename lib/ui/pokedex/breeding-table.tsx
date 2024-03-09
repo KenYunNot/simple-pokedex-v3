@@ -5,6 +5,14 @@ import SectionHeader from "@/lib/ui/section/header";
 
 
 export default function BreedingTable({ pokemon } : { pokemon : Pokemon }) {
+  /* 
+    We need to safelist these Tailwind classes or else the dynamic class names (gender section) won't add the styles
+    w-[0%] w-[12.5%] w-[25%] w-[37.5%] w-[50%] w-[62.5%] w-[75%] w-[87.5%] w-[100%] 
+  */
+
+  const femaleRate = pokemon.gender_rate * 12.5;
+  const maleRate = 100 - femaleRate;
+
   return (
     <Section>
       <SectionHeader>Breeding Data</SectionHeader>
@@ -23,7 +31,10 @@ export default function BreedingTable({ pokemon } : { pokemon : Pokemon }) {
           </tr>
           <tr>
             <th>Gender</th>
-            <td><span id="male">{(1000 - (pokemon.gender_rate * 125)) / 10}% male</span>, <span id="female">{pokemon.gender_rate * 125 / 10}% female</span></td>
+            <td>
+              <span className={`w-[${maleRate}%] bg-blue-600`}>{maleRate}% male</span>
+              {", "}
+              <span className={`w-[${femaleRate}%] bg-pink-600`}>{femaleRate}% female</span></td>
           </tr>
           <tr>
             <th>Egg Cycles</th>
