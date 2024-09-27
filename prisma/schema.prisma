@@ -21,7 +21,7 @@ model Pokemon {
   abilities  String[]
   height     Int
   weight     Int
-  image_url  String?
+  image_url  String
   hp         Int
   attack     Int
   defense    Int
