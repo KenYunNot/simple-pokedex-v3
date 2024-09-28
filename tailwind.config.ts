@@ -29,6 +29,15 @@ const config: Config = {
         steel: '#aab',
         fairy: '#e9e'
       },
+      keyframes: {
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        }
+      },
+      animation: {
+        bounce: 'bounce 0.2s',
+      },
     },
   },
   plugins: [],
