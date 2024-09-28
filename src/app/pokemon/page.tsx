@@ -1,6 +1,7 @@
 import React from 'react'
-import Pagination from '@/ui/pagination';
-import PokemonList from '@/ui/pokemonList'
+import Pagination from '@/ui/pokemon/pagination';
+import PokemonList from '@/ui/pokemon/pokemonList'
+import Search from '@/ui/pokemon/search';
 import { getTotalPokemonPages } from '@/libs/actions';
 
 const PokemonListPage = async ({
@@ -14,6 +15,7 @@ const PokemonListPage = async ({
 
   return (
     <div className='flex flex-col m-4'>
+      <Search />
       <PokemonList page={page} query={query} />
       <Pagination page={page} totalPages={totalPages} />
     </div>

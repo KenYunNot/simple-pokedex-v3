@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
-import TypeIcon from './type-icon';
+import TypeIcon from '../type-icon';
 import { fetchPokemonPage } from '@/libs/actions';
 import { capitalize } from '@/libs/helpers';
 import type { Pokemon } from '@prisma/client';
