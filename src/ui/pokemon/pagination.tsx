@@ -3,8 +3,8 @@
 import React from 'react'
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { cn } from '@/libs/cn';
-import { generatePagination } from '@/libs/helpers';
+import { cn } from '@/lib/cn';
+import { generatePagination } from '@/lib/helpers';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 const Pagination = ({

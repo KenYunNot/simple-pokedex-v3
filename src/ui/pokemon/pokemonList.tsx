@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link';
 import TypeIcon from '../type-icon';
-import { fetchPokemonPage } from '@/libs/actions';
-import { capitalize } from '@/libs/helpers';
+import { fetchPokemonPage } from '@/lib/actions';
+import { capitalize } from '@/lib/helpers';
 import type { Pokemon } from '@prisma/client';
 
 

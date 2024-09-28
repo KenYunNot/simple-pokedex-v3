@@ -2,7 +2,7 @@ import React from 'react'
 import Pagination from '@/ui/pokemon/pagination';
 import PokemonList from '@/ui/pokemon/pokemonList'
 import Search from '@/ui/pokemon/search';
-import { getTotalPokemonPages } from '@/libs/actions';
+import { getTotalPokemonPages } from '@/lib/actions';
 
 const PokemonListPage = async ({
   searchParams,
