@@ -27,7 +27,8 @@ const config: Config = {
         dragon: '#76e',
         dark: '#754',
         steel: '#aab',
-        fairy: '#e9e'
+        fairy: '#e9e',
+        pokeballred: '#FF1C1C',
       },
       keyframes: {
         bounce: {

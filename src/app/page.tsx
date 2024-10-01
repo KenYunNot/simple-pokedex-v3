@@ -1,11 +1,9 @@
-import Image from "next/image";
-import prisma from "@/libs/prisma";
-
+import Hero from "@/ui/hero";
 
 export default async function Home() {
   return (
-    <div className="">
-      Hello world!
-    </div>
+    <main className="">
+      <Hero />
+    </main>
   );
 }
