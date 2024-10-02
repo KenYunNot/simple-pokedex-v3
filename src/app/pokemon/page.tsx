@@ -4,7 +4,7 @@ import PokemonList from '@/ui/pokemon/pokemonList'
 import Search from '@/ui/pokemon/search';
 import { getTotalPokemonPages } from '@/lib/actions';
 
-const PokemonListPage = async ({
+const Pokemon = async ({
   searchParams,
 }: {
   searchParams: { page?: string, query?: string }
@@ -22,4 +22,4 @@ const PokemonListPage = async ({
   )
 }
 
-export default React.memo(PokemonListPage)
+export default React.memo(Pokemon)
