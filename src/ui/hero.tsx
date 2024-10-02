@@ -27,15 +27,17 @@ const Hero = () => {
     <div className='relative flex flex-col gap-[6vh] w-full px-3 py-[8vh] bg-gradient-to-b from-pokeballred to-red-500 text-white'>
       <div className='flex flex-col gap-[2vh]'>
         <Badge className='mx-auto text-xs md:text-sm lg:text-md shadow-md border-none font-bold bg-yellow-500'>Introducing Simple Pokedex</Badge>
-        <div className='flex flex-col gap-[1vh]'>
+        <div className='flex flex-col gap-[1vh] lg:gap-[3vh]'>
           <h1 className='mt-6 lg:mt-10 text-center text-4xl md:text-5xl lg:text-7xl font-semibold'>Pokemon made <span className='text-yellow-400 font-extrabold'>simple</span></h1>
-          <p className='md:text-lg lg:text-xl text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <p className='text-center italic md:text-lg lg:text-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
       </div>
       <Carousel
         className='max-w-[1750px] mx-auto'
         opts={{
+          align: 'start',
           loop: true,
+          slidesToScroll: 3,
         }}
         plugins={[
           Autoplay({
@@ -46,7 +48,7 @@ const Hero = () => {
         <CarouselContent>
           {Object.entries(pokemonImages).map(([name, image_url]) => {
             return (
-              <CarouselItem className='flex justify-center md:basis-1/3 lg:basis-1/5'>
+              <CarouselItem className='flex justify-center md:basis-1/3'>
                 <Image 
                   src={image_url}
                   width={500}
