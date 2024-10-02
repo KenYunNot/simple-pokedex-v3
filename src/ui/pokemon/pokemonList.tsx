@@ -45,7 +45,7 @@ const PokemonListCard = async ({
           {pokemon.types.map(type => {
             return (
               <React.Fragment key={type}>
-                <TypeIcon type={type} className='min-w-20 px-2 py-1' />
+                <TypeIcon type={type} variant='icon' />
               </React.Fragment>
             )
           })}
