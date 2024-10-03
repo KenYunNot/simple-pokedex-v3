@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MenuIcon } from "lucide-react";
+import Navbar from "@/ui/navbar";
 
 import "./globals.css";
 
@@ -18,10 +18,7 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        <nav className='relative flex justify-end items-center w-full h-12 px-2 bg-pokeballred text-white'>
-          <p className='absolute left-2  font-bold'>Simple Pokedex v3</p>
-          <MenuIcon className='p-1 w-8 h-8 rounded-sm' />
-        </nav>
+        <Navbar />
         {children}
       </body>
     </html>
