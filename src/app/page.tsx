@@ -39,7 +39,7 @@ export default function Home() {
           opts={{
             align: 'start',
             loop: true,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
           }}
           plugins={[
             Autoplay({
