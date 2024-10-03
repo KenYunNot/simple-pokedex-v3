@@ -13,7 +13,7 @@ const TypeIcon = ({
     <div className={cn('flex justify-center items-center',
       {
         'rounded-md min-w-20 px-2 py-1' : variant === 'text',
-        'rounded-full p-2' : variant === 'icon',
+        'rounded-full p-2 aspect-square' : variant === 'icon',
       },
       {
         'bg-normal' : type === 'normal',
@@ -38,7 +38,7 @@ const TypeIcon = ({
     )}>
       {variant === 'text'
         ? <p className='text-center text-xs text-white' style={{ textShadow: '1px 1px 2px black' }}>{type.toUpperCase()}</p>
-        : <Image src={`${type}.svg`} width={20} height={20} alt={type} /> }
+        : <Image src={`/${type}.svg`} width={20} height={20} alt={type} /> }
     </div>
   )
 }
