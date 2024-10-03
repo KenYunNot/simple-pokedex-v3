@@ -1,5 +1,8 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Badge from '@/ui/badge';
 import {
   Carousel,
@@ -8,7 +11,7 @@ import {
 } from "@/ui/shadcn/carousel"
 import Autoplay from 'embla-carousel-autoplay';
 
-export default async function Home() {
+export default function Home() {
   const pokemonImages = {
     bulbasaur: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
     ivysaur: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
@@ -32,7 +35,7 @@ export default async function Home() {
           </div>
         </div>
         <Carousel
-          className='max-w-[1750px] mx-auto'
+          className='w-[70%] mx-auto'
           opts={{
             align: 'start',
             loop: true,
@@ -47,14 +50,17 @@ export default async function Home() {
           <CarouselContent>
             {Object.entries(pokemonImages).map(([name, image_url]) => {
               return (
-                <CarouselItem className='flex justify-center md:basis-1/3'>
-                  <Image 
-                    src={image_url}
-                    width={500}
-                    height={500}
-                    alt={`Picture of ${name}`}
-                    key={name}
-                  />
+                <CarouselItem key={name} className='flex justify-center md:basis-1/3'>
+                  <Link href={`/pokemon/${name}`}>
+                    <Image 
+                      className='hover:animate-swell'
+                      src={image_url}
+                      width={500}
+                      height={500}
+                      alt={name}
+                      key={name}
+                    />
+                  </Link>
                 </CarouselItem>
               )
             })}
