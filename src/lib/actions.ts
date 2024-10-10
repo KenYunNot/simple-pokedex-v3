@@ -21,3 +21,16 @@ export async function getTotalPokemonPages() {
   const pokemonCount = await prisma.pokemon.count();
   return Math.ceil(pokemonCount / POKEMON_PER_PAGE);
 }
+
+export async function getPokemon(nameOrId: string) {
+  const pokemon = await prisma.pokemon.findFirst({
+    where: {
+      OR: [
+        { id: Number(nameOrId) || -1 },
+        { name: nameOrId },
+      ]
+    }
+  });
+
+  return pokemon;
+}
