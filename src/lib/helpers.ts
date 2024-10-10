@@ -29,7 +29,7 @@ export function convertHeight(heightDecimeters: number) {
 }
 
 export function convertWeight(weightHectograms: number) {
-  const weightPounds = weightHectograms * 22.0462;
+  const weightPounds = weightHectograms * 0.220462;
   
   return `${weightPounds.toFixed(1)} lbs`;
 }
