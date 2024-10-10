@@ -19,3 +19,22 @@ export function generatePagination(page: number, totalPages: number) {
     return [1, '...', page-1, page, page+1, '...', totalPages];
   }
 }
+
+export function convertHeight(heightDecimeters: number) {
+  const heightInches = heightDecimeters * 3.93701;
+  const feet = Math.trunc(heightInches / 12);
+  const inches = Math.round(heightInches % 12);
+  
+  return `${feet}\' ${inches}\"`
+}
+
+export function convertWeight(weightHectograms: number) {
+  const weightPounds = weightHectograms * 22.0462;
+  
+  return `${weightPounds.toFixed(1)} lbs`;
+}
+
+export function formatAbilityName(name: string) {
+  const tokens = name.split('-');
+  return tokens.map(token => capitalize(token)).join(' ');
+}
