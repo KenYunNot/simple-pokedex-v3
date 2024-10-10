@@ -29,6 +29,14 @@ export async function getPokemon(nameOrId: string) {
         { id: Number(nameOrId) || -1 },
         { name: nameOrId },
       ]
+    },
+    include: {
+      species: {
+        select: {
+          genus: true,
+          gender_rate: true,
+        }
+      }
     }
   });
 
