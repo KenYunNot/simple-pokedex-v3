@@ -32,12 +32,18 @@ type Stats = 'hp' | 'attack'| 'defense' | 'sp_attack' | 'sp_defense' | 'speed';
 
 const StatBar = ({ name, value } : { name: Stats, value: number }) => {
   const numFilled = Math.ceil(value / 16);
-  const numEmpty = 15 - numFilled;
 
   return (
-    <div className="flex flex-col basis-1/6 gap-1 mt-6 mb-2">
-      {Array(numEmpty).fill('').map(_ => <div className="h-[10px] bg-white" /> )}
-      {Array(numFilled).fill('').map(_ => <div className="h-[10px] bg-sky-500" /> )}
+    <div className="basis-1/6 mt-6 mb-2">
+      <div className="relative bg-white overflow-hidden">
+        {Array(15).fill('').map(_ => <div className="relative h-[13px] border-b-[3px] border-gray-300 bg-transparent z-10" /> )}
+        <div 
+          className="absolute top-full w-full bg-sky-500 animate-slide" 
+          style={{ 
+            height: `${numFilled * 13}px`,
+          }}
+        />
+      </div>
       <p className="text-xs text-center font-bold">
         {match(name)
           .with('hp', _ => 'HP')
