@@ -42,3 +42,25 @@ export async function getPokemon(nameOrId: string) {
 
   return pokemon;
 }
+
+export async function getPokemonStats(nameOrId: string) {
+  const pokemonStats = await prisma.pokemon.findFirst({
+    where: {
+      OR: [
+        { id: Number(nameOrId) || -1 },
+        { name: nameOrId },
+      ]
+    },
+    select: {
+      name: true,
+      hp: true,
+      attack: true,
+      defense: true,
+      sp_attack: true,
+      sp_defense: true,
+      speed: true,
+    }
+  });
+
+  return pokemonStats;
+}
