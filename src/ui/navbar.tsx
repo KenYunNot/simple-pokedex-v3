@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className='relative flex items-center h-12 md:h-20 px-2 bg-pokeballred text-white'>
       <Image 
-        className='absolute left-2 md:left-6'
+        className='absolute w-52 h-auto p-2 md:left-6 md:p-0 md:w-72'
         src={'/logo.png'}
         width={300}
         height={300}
