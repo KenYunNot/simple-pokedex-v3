@@ -1,7 +1,7 @@
 import React from 'react';
 import Badge from '@/ui/badge';
 import PokemonCarousel from '@/ui/pokemon/carousel';
-
+import SocialCard from '@/ui/social-card'
 
 export default function Home() {
   return (
@@ -15,6 +15,12 @@ export default function Home() {
           </div>
         </div>
         <PokemonCarousel />
+      </div>
+
+      <div className="flex justify-center gap-10 max-w-[75vw] mx-auto my-14">
+        <SocialCard social='github' />
+        <SocialCard social='linkedin' />
+        <SocialCard social='email' />
       </div>
     </main>
   );

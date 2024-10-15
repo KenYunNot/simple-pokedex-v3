@@ -41,12 +41,12 @@ const config: Config = {
         },
         'delayed-fill': {
           '100%': { transform: 'translateY(-100%)' },
-        }
+        },
       },
       animation: {
         bounce: 'bounce 0.2s',
         swell: 'swell 0.4s ease-in-out 1',
-        'delayed-fill': 'delayed-fill 1s ease-out 1 0.5s forwards'
+        'delayed-fill': 'delayed-fill 1s ease-out 1 0.5s forwards',
       },
     },
   },
