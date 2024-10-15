@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react'
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
 import { MenuIcon } from "lucide-react";
@@ -14,7 +15,13 @@ const links = [
 const Navbar = () => {
   return (
     <nav className='relative flex items-center h-12 md:h-20 px-2 bg-pokeballred text-white'>
-      <p className='absolute left-2 font-bold'>Simple Pokedex v3</p>
+      <Image 
+        className='absolute left-2 md:left-6'
+        src={'/logo.png'}
+        width={300}
+        height={300}
+        alt='Simple Pokedex v3'
+      />
       <Mobile />
       <TabletDesktop />
     </nav>
