@@ -38,7 +38,7 @@ const Mobile = () => {
         'hidden' : menuToggle === false,
       })}>
         {links.map(link => (
-          <li className='flex w-full h-12 font-bold'>
+          <li key={link.href} className='flex w-full h-12 font-bold'>
             <Link key={link.href} href={link.href} className='flex justify-center items-center w-full h-full'>
               {link.text}
             </Link>
@@ -54,7 +54,7 @@ const TabletDesktop = () => {
     <div className='hidden md:flex justify-center w-full'>
       <ul className='flex gap-3 mx-auto text-white list-none'>
         {links.map(link => (
-          <li className='flex w-32 h-12 font-bold rounded-md duration-200 hover:bg-white hover:text-pokeballred'>
+          <li key={link.href} className='flex w-32 h-12 font-bold rounded-md duration-200 hover:bg-white hover:text-pokeballred'>
             <Link key={link.href} href={link.href} className='flex justify-center items-center w-full h-full'>
               {link.text}
             </Link>

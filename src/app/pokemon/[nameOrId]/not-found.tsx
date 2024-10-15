@@ -1,12 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
 
 const PokemonNotFound = () => {
   return (
     <div className='flex flex-col gap-3 items-center mt-[25vh]'>
-      <h1 className='text-2xl text-center font-bold'>Couldn't find that Pokemon!</h1>
+      <h1 className='text-2xl text-center font-bold'>Couldn{'\''}t find that Pokemon!</h1>
       <Image 
         src='/pokeball.svg'
         width={200}

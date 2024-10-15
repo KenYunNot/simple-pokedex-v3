@@ -36,7 +36,7 @@ const StatBar = ({ name, value } : { name: Stats, value: number }) => {
   return (
     <div className="basis-1/6 mt-6 mb-2">
       <div className="relative bg-white overflow-hidden">
-        {Array(15).fill('').map(_ => <div className="relative h-[13px] border-b-[3px] border-gray-300 bg-transparent z-10" /> )}
+        {Array(15).fill('').map((_, i) => <div key={i} className="relative h-[13px] border-b-[3px] border-gray-300 bg-transparent z-10" /> )}
         <div 
           className="absolute top-full w-full bg-sky-500 animate-delayed-fill" 
           style={{ 
@@ -46,9 +46,9 @@ const StatBar = ({ name, value } : { name: Stats, value: number }) => {
       </div>
       <p className="text-xs text-center font-bold">
         {match(name)
-          .with('hp', _ => 'HP')
-          .with('sp_attack', _ => 'Special Attack')
-          .with('sp_defense', _ => 'Special Defense')
+          .with('hp', () => 'HP')
+          .with('sp_attack', () => 'Special Attack')
+          .with('sp_defense', () => 'Special Defense')
           .otherwise(name => capitalize(name))}
       </p>
     </div>
