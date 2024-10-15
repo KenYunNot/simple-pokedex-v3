@@ -38,7 +38,7 @@ const StatBar = ({ name, value } : { name: Stats, value: number }) => {
       <div className="relative bg-white overflow-hidden">
         {Array(15).fill('').map(_ => <div className="relative h-[13px] border-b-[3px] border-gray-300 bg-transparent z-10" /> )}
         <div 
-          className="absolute top-full w-full bg-sky-500 animate-slide" 
+          className="absolute top-full w-full bg-sky-500 animate-delayed-fill" 
           style={{ 
             height: `${numFilled * 13}px`,
           }}
