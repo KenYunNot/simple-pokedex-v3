@@ -35,17 +35,12 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-8px)' },
         },
-        swell: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
-        },
         'delayed-fill': {
           '100%': { transform: 'translateY(-100%)' },
         },
       },
       animation: {
         bounce: 'bounce 0.2s',
-        swell: 'swell 0.4s ease-in-out 1',
         'delayed-fill': 'delayed-fill 1s ease-out 1 0.5s forwards',
       },
     },

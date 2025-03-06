@@ -43,7 +43,7 @@ const PokemonCarousel = () => {
             <CarouselItem key={name} className='flex justify-center md:basis-1/3'>
               <Link href={`/pokemon/${name}`}>
                 <Image 
-                  className='hover:animate-swell'
+                  className='hover:scale-105 duration-200'
                   src={image_url}
                   width={500}
                   height={500}
