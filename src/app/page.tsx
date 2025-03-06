@@ -20,7 +20,6 @@ export default function Home() {
       <div className="flex justify-center gap-10 max-w-[75vw] mx-auto my-14">
         <SocialCard social='github' />
         <SocialCard social='linkedin' />
-        <SocialCard social='email' />
       </div>
     </main>
   );
