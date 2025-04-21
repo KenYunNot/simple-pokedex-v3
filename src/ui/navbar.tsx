@@ -1,68 +1,41 @@
-"use client";
+'use client';
 
-import React from 'react'
-import Image from 'next/image';
+import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/cn';
-import { MenuIcon } from "lucide-react";
+import { cn } from '@/lib/utils';
+import { MenuIcon } from 'lucide-react';
 
-
-const links = [
-  { href: '/', text: 'Home' },
-  { href: '/pokemon', text: 'Pokemon' },
-]
+const links = [{ href: '/pokemon', text: 'Pokemon' }];
 
 const Navbar = () => {
   return (
-    <nav className='relative flex items-center h-12 md:h-20 px-2 bg-pokeballred text-white'>
-      <Image 
-        className='absolute w-52 h-auto p-2 md:left-6 md:p-0 md:w-72'
-        src={'/logo.png'}
-        width={300}
-        height={300}
+    <nav
+      id='navbar'
+      className='w-full p-3 flex flex-col lg:flex-row justify-evenly items-center bg-pokeballred text-white z-50 overflow-hidden'
+    >
+      <img
+        className='w-52 md:w-72'
+        src='/logo.webp'
         alt='Simple Pokedex v3'
       />
-      <Mobile />
-      <TabletDesktop />
+      <ul className='p-2 flex gap-3 text-white list-none'>
+        {links.map((link) => (
+          <li
+            key={link.href}
+            className='px-2 py-1 flex bg-amber-400 text-white font-bold max-lg:text-sm rounded-full duration-200 hover:bg-amber-500'
+          >
+            <Link
+              key={link.href}
+              href={link.href}
+              className='flex justify-center items-center'
+            >
+              {link.text}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
-  )
-}
+  );
+};
 
-const Mobile = () => {
-  const [menuToggle, setMenuToggle] = React.useState(false);
-
-  return (
-    <div className='flex md:hidden justify-end w-full'>
-      <MenuIcon className='p-1 w-8 h-8 rounded-sm' onClick={() => setMenuToggle(!menuToggle)} />
-      <ul className={cn('absolute top-12 left-0 flex flex-col w-full bg-white text-pokeballred border border-t-0 border-pokeballred list-none z-50', {
-        'hidden' : menuToggle === false,
-      })}>
-        {links.map(link => (
-          <li key={link.href} className='flex w-full h-12 font-bold'>
-            <Link key={link.href} href={link.href} className='flex justify-center items-center w-full h-full'>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-const TabletDesktop = () => {
-  return (
-    <div className='hidden md:flex justify-center w-full'>
-      <ul className='flex gap-3 mx-auto text-white list-none'>
-        {links.map(link => (
-          <li key={link.href} className='flex w-32 h-12 font-bold rounded-md duration-200 hover:bg-white hover:text-pokeballred'>
-            <Link key={link.href} href={link.href} className='flex justify-center items-center w-full h-full'>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;
