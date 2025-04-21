@@ -6,7 +6,7 @@ const TypeIcon = ({ type, variant }: { type: string; variant: 'text' | 'icon' })
   return (
     <div
       className={cn(
-        'flex justify-center items-center shadow-sm shadow-black',
+        'flex justify-center items-center shadow-xs shadow-black',
         {
           'rounded-md min-w-20 px-2 py-1': variant === 'text',
           'rounded-full p-[6px] aspect-square': variant === 'icon',

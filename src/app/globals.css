@@ -1,9 +1,107 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-* {
-  font-family: Helvetica, Sans-Serif;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-normal: #aa9;
+  --color-fire: #f42;
+  --color-water: #39f;
+  --color-electric: #fc3;
+  --color-grass: #7c5;
+  --color-ice: #6cf;
+  --color-fighting: #b54;
+  --color-poison: #a59;
+  --color-ground: #db5;
+  --color-flying: #89f;
+  --color-psychic: #f59;
+  --color-bug: #ab2;
+  --color-rock: #ba6;
+  --color-ghost: #66b;
+  --color-dragon: #76e;
+  --color-dark: #754;
+  --color-steel: #aab;
+  --color-fairy: #e9e;
+  --color-pokeballred: #ff1c1c;
+  
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --animate-bounce: bounce 0.2s;
+  --animate-delayed-fill: delayed-fill 1s ease-out 1 0.5s forwards;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes delayed-fill {
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer utilities {
+  * {
+    font-family: Helvetica, Sans-Serif;
+  }
 }
 
 

@@ -15,7 +15,7 @@ const PokemonCard = async ({ nameOrId }: { nameOrId: string }) => {
     notFound();
   }
 
-  const backgroundGradientClassname = cn('bg-gradient-to-r', {
+  const backgroundGradientClassname = cn('bg-linear-to-r', {
     'bg-normal': pokemon.types[0] === 'normal',
     'from-red-600 via-fire to-red-600': pokemon.types[0] === 'fire',
     'from-blue-600 via-water to-blue-600': pokemon.types[0] === 'water',
