@@ -5,24 +5,29 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { MenuIcon } from 'lucide-react';
 
-const links = [{ href: '/pokemon', text: 'Pokemon' }];
+const links = [
+  { href: '/', text: 'Home' },
+  { href: '/pokemon', text: 'Pokemon' },
+];
 
 const Navbar = () => {
   return (
     <nav
       id='navbar'
-      className='w-full p-3 flex flex-col lg:flex-row justify-evenly items-center bg-pokeballred text-white z-50 overflow-hidden'
+      className='w-full px-6 py-3 flex max-md:flex-col justify-between lg:justify-evenly items-center bg-pokeballred text-white'
     >
-      <img
-        className='w-52 md:w-72'
-        src='/logo.webp'
-        alt='Simple Pokedex v3'
-      />
-      <ul className='p-2 flex gap-3 text-white list-none'>
+      <Link href='/'>
+        <img
+          className='w-60 md:w-72'
+          src='/logo.webp'
+          alt='Simple Pokedex v3'
+        />
+      </Link>
+      <ul className='max-md:mt-3 p-1 md:p-2 flex gap-6 text-white list-none bg-white rounded-full'>
         {links.map((link) => (
           <li
             key={link.href}
-            className='px-2 py-1 flex bg-amber-400 text-white font-bold max-lg:text-sm rounded-full duration-200 hover:bg-amber-500'
+            className='px-2 py-1 flex max-lg:text-sm font-bold text-pokeballred rounded-full duration-200 hover:bg-pokeballred hover:text-white active:bg-red-400 active:text-white'
           >
             <Link
               key={link.href}
