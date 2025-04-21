@@ -12,7 +12,7 @@ const Pokemon = async ({
 }: {
   searchParams: Promise<{ page: string; query: string }>;
 }) => {
-  const { page, query } = await searchParams;
+  const { page = '1', query = '' } = await searchParams;
   // const page = Number(searchParams.page) || 1;
   // const query = searchParams.query || '';
   const totalPages = await getTotalPokemonPages();
