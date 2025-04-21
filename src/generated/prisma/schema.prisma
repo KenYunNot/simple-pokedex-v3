@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js" // Required
+  output   = "../src/generated/prisma" // Required path
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Pokemon {
+  id         Int            @id
+  name       String
+  types      String[]
+  abilities  String[]
+  height     Int
+  weight     Int
+  image_url  String
+  hp         Int
+  attack     Int
+  defense    Int
+  sp_attack  Int
+  sp_defense Int
+  speed      Int
+  species_id Int
+  species    PokemonSpecies @relation(fields: [species_id], references: [id])
+}
+
+model PokemonSpecies {
+  id          Int       @id
+  name        String
+  genus       String
+  gender_rate Int
+  pokemon     Pokemon[]
+}
