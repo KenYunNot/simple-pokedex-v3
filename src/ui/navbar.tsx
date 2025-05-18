@@ -2,15 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { MenuIcon } from 'lucide-react';
 
 const links = [
-  { href: '/', text: 'Home' },
   { href: '/pokemon', text: 'Pokemon' },
 ];
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   return (
     <nav
       id='navbar'
@@ -27,7 +28,9 @@ const Navbar = () => {
         {links.map((link) => (
           <li
             key={link.href}
-            className='px-2 py-1 flex max-lg:text-sm font-bold text-pokeballred rounded-full duration-200 hover:bg-pokeballred hover:text-white active:bg-red-400 active:text-white'
+            className={cn('px-2 py-1 flex max-lg:text-sm font-bold text-pokeballred rounded-full duration-200 hover:bg-pokeballred hover:text-white active:bg-red-400 active:text-white', {
+              'bg-pokeballred text-white pointer-events-none' : link.href === pathname,
+            })}
           >
             <Link
               key={link.href}
