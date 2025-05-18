@@ -20,7 +20,7 @@ const Pagination = ({ page, totalPages }: { page: number; totalPages: number }) 
   };
 
   return (
-    <div className='flex justify-center w-fit mx-auto mt-6 mb-3 border rounded-lg overflow-hidden'>
+    <div className='w-fit mx-auto flex justify-center mt-6 mb-3 overflow-hidden'>
       <PaginationArrow
         href={createPageUrl(currentPage - 1)}
         direction='left'
@@ -52,7 +52,7 @@ export const PaginationArrow = ({
   direction: 'left' | 'right';
 }) => {
   return (
-    <div className='w-8 h-8 bg-red-400'>
+    <div className='w-12 h-12 bg-red-400'>
       <Link
         href={href}
         className='flex justify-center items-center w-full h-full'
@@ -78,10 +78,10 @@ export const PaginationNumber = ({
 }) => {
   return (
     <div
-      className={cn('w-8 h-8 text-sm ', {
+      className={cn('w-12 h-12 text-lg ', {
         'pointer-events-none': typeof page === 'string',
         'hover:bg-gray-100': typeof page === 'number',
-        'bg-gray-400': isCurrentPage,
+        'bg-gray-400 pointer-events-none': isCurrentPage,
       })}
     >
       {page === '...' ? (
