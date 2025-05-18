@@ -35,7 +35,7 @@ const TypeIcon = ({ type, variant }: { type: string; variant: 'text' | 'icon' })
     >
       {variant === 'text' ? (
         <p
-          className='text-center text-xs text-white'
+          className='text-center text-sm text-white font-bold'
           style={{ textShadow: '1px 1px 2px black' }}
         >
           {type.toUpperCase()}
